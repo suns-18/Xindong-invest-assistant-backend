@@ -17,15 +17,15 @@
 
 ## 2.trade_record
 
-模拟交易信息
+模拟交易 信息
 
-| 字段名          | 字段类型        | 字段描述      |
-|--------------|-------------|-----------|
-| id           | int         | 交易记录id    |
-| product_code | int         | 模拟交易的产品代码 |
-| price        | decimal(.2) | 交易价格      |
-| amount       | int         | 交易数量      |
-| deal_time    | datetime    | 交易时间      |
+| 字段名        | 字段类型        | 字段描述      |
+|------------|-------------|-----------|
+| id         | int         | 交易记录id    |
+| product_id | int         | 模拟交易的产品代码 |
+| price      | decimal(.2) | 交易价格      |
+| amount     | int         | 交易数量      |
+| deal_time  | datetime    | 交易时间      |
 
 ## 3. question_title
 

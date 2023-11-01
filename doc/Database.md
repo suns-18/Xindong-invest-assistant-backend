@@ -6,12 +6,12 @@
 
 | 字段名         | 字段类型          | 字段描述                     |
 |-------------|---------------|--------------------------|
-| code        |               | 产品代码                     |
+| code        | int              | 产品代码                     |
 | name        | varchar(255)  | 产品名称                     |
-| details     | **longtext?** | 产品细节：公司背景、市场走势、成交额、市场价等等 |
+| details     | longtext| 产品细节：公司背景、市场走势、成交额、市场价等等 |
 | price       | decimal(.2)   | 购入价                      |
 | anti_risk   |               | 非风险率                     |
-| flexibility |               | 灵活性：指定期还是非定期             |
+| flexibility |               | 灵活性：指定期还是非定期           
 | return_rate |               | 汇报率                      |
 | state       |               | 收藏状态                     |
 
@@ -21,10 +21,10 @@
 
 | 字段名          | 字段类型        | 字段描述      |
 |--------------|-------------|-----------|
-| id           |             | 交易记录id    |
-| product_code | **int?**    | 模拟交易的产品代码 |
+| id           | int         | 交易记录id    |
+| product_code | int         | 模拟交易的产品代码 |
 | price        | decimal(.2) | 交易价格      |
-| amount       | decimal(.2) | 交易数量      |
+| amount       | int         | 交易数量      |
 | deal_time    | datetime    | 交易时间      |
 
 ## 3. question_title
@@ -45,7 +45,7 @@
 | id       | int          | 选项id      |
 | question | int          | 对应问题id    |
 | title    | varchar(255) | 选项描述      |
-| value    | int          | 选项对应分值（？） |
+| value    | int          | 选项对应分值 |
 
 ## 5. answer
 
@@ -65,5 +65,5 @@
 |----------------|------|-------------|
 | id             | int  | 流水号         |
 | product_code   | int  | 模拟持仓内部的产品代码 |
-| purchase_price | int  | 买入价格        |
+| purchase_price | decimal(.2)  | 买入价格        |
 | amount         | int  | 在仓数量        |

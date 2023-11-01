@@ -4,16 +4,16 @@
 
 理财产品信息
 
-| 字段名         | 字段类型          | 字段描述                     |
-|-------------|---------------|--------------------------|
-| code        | int              | 产品代码                     |
-| name        | varchar(255)  | 产品名称                     |
-| details     | longtext| 产品细节：公司背景、市场走势、成交额、市场价等等 |
-| price       | decimal(.2)   | 购入价                      |
-| anti_risk   |               | 非风险率                     |
-| flexibility |               | 灵活性：指定期还是非定期           
-| return_rate |               | 汇报率                      |
-| state       |               | 收藏状态                     |
+| 字段名         | 字段类型         | 字段描述                     |
+|-------------|--------------|--------------------------|
+| id          | int          | 产品id                     |
+| name        | varchar(255) | 产品名称                     |
+| details     | longtext     | 产品细节：公司背景、市场走势、成交额、市场价等等 |
+| price       | decimal(.2)  | 购入价                      |
+| anti_risk   |              | 非风险率                     |
+| flexibility |              | 灵活性：指定期还是非定期             
+| return_rate |              | 汇报率                      |
+| state       |              | 收藏状态                     |
 
 ## 2.trade_record
 
@@ -40,13 +40,13 @@
 
 问题选项
 
-| 字段名      | 字段类型         | 字段描述      |
-|----------|--------------|-----------|
-| id       | int          | 选项id      |
-| question | int          | 对应问题id    |
-| title    | varchar(255) | 选项描述      |
-| value    | int          | 选项对应分值 |
-|question_type| int| 对应指标|
+| 字段名           | 字段类型         | 字段描述   |
+|---------------|--------------|--------|
+| id            | int          | 选项id   |
+| question      | int          | 对应问题id |
+| title         | varchar(255) | 选项描述   |
+| value         | int          | 选项对应分值 |
+| question_type | int          | 对应指标   |
 
 ## 5. answer
 
@@ -62,9 +62,10 @@
 
 持仓信息
 
-| 字段名            | 字段类型 | 字段描述        |
-|----------------|------|-------------|
-| id             | int  | 流水号         |
-| product_code   | int  | 模拟持仓内部的产品代码 |
-| purchase_price | decimal(.2)  | 买入价格        |
-| amount         | int  | 在仓数量        |
+| 字段名            | 字段类型        | 字段描述        |
+|----------------|-------------|-------------|
+| id             | int         | 流水号         |
+| product_id     | int         | 模拟持仓内部的产品代码 |
+| purchase_price | decimal(.2) | 买入价格        |
+| amount         | int         | 在仓数量        |
+| sold           | int         | 是否已售出，0假1真  |

@@ -3,11 +3,15 @@ package neu.xindong.ia.controller;
 import neu.xindong.ia.dto.HttpResponse;
 import neu.xindong.ia.entity.Answer;
 import neu.xindong.ia.entity.Product;
+import neu.xindong.ia.entity.QuestionOption;
+import neu.xindong.ia.service.AnswerService;
 import neu.xindong.ia.service.ProductService;
+import neu.xindong.ia.service.QuestionOptionService;
 import neu.xindong.ia.service.impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -15,6 +19,12 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private AnswerService answerService;
+
+    @Autowired
+    private QuestionOptionService optionService;
 
 //    @GetMapping(value = "/queryByProductId",method= RequestMethod.POST)
 //    public HttpResponse queryList(@RequestBody Product product){
@@ -56,10 +66,31 @@ public class ProductController {
 
     // 获取综合排序的产品
     @PostMapping("/sortByComprehensive")
-    public HttpResponse getProductsSortedByComprehensive(@RequestBody Product product,
-                                                         @RequestBody Answer answer) {
+    public HttpResponse getProductsSortedByComprehensive() {
         List<Product> products;
-        products =productService.sortProductByComprehensive(product, answer);
+        List<Answer> answers;
+        List<QuestionOption> optionsAntiRisk= new ArrayList<>();
+        List<QuestionOption> optionsStability= new ArrayList<>();
+        List<QuestionOption> optionsReturn= new ArrayList<>();
+
+        answers = answerService.findAll();
+        answers.forEach(e->{
+            var o= optionService.getById(e.getOption());
+            switch (o.getQuestionType()){
+                case 0:
+                    optionsAntiRisk.add(o);
+                    break;
+                case 1:
+                    optionsStability.add(o);
+                    break;
+                case 2:
+                    optionsReturn.add(o);
+                    break;
+            }
+        });
+
+
+        products =productService.sortProductByComprehensive(optionsAntiRisk,optionsStability,optionsReturn);
         return HttpResponse.builder()
                 .code(200)
                 .message("Products successfully sorted by comprehensive criteria")

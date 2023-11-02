@@ -15,6 +15,9 @@ import java.util.List;
 @Service
 public class ProductServiceImpl extends ServiceImpl<ProductDao, Product>
         implements ProductService {
+    List<Product> findAll(){
+        return list();
+    }
     /**code by ryr
      * sort product By Risk
      * @return
@@ -39,10 +42,14 @@ public class ProductServiceImpl extends ServiceImpl<ProductDao, Product>
         List<Product> result=query().orderBy(true,false,"return_rate").list();
         return result;
     }
-    public List<ProductCom> sortProductByComprehensive(QuestionOption questionOptionAntiRisk,
-                                                    QuestionOption questionOptionStability,
-                                                    QuestionOption questionOptionReturn,
-                                                    List<Product> productList){
+    public List<ProductCom> sortProductByComprehensive(List<QuestionOption> questionOptionAntiRisk,
+                                                       List<QuestionOption> questionOptionStability,
+                                                       List<QuestionOption> questionOptionReturn){
+
+        var productList = findAll();
+
+        //var optionAntiRisk = questionOptionAntiRisk.
+
 
         return Calculate.calculateComprehensive(questionOptionAntiRisk,
                                                                 questionOptionStability,

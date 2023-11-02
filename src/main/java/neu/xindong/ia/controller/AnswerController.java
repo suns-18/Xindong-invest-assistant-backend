@@ -22,28 +22,28 @@ public class AnswerController {
     public HttpResponse getAllAnswers() {
         List<Answer> answers = answerService.findAll();
         return HttpResponse.builder()
-                .code(1)
+                .code(200)
                 .message("成功获取用户填写的风险问卷的答案")
                 .data(answers)
                 .build();
     }
 
     // 根据问题ID获取答案的风险偏好值
-//    @GetMapping("/antiRisk")
-//    public HttpResponse getAnswerAntiRiskByQuestion(@RequestBody Question question) {
-//        Integer antiRiskValue = answerService.findAnswerAntiRiskByQuestion(question);
-//        if (antiRiskValue != null) {
-//            return HttpResponse.builder()
-//                    .code(1)
-//                    .message("成功获取对应问题答案的风险偏好值")
-//                    .data(antiRiskValue)
-//                    .build();
-//        } else {
-//            return HttpResponse.builder()
-//                    .code(0)
-//                    .message("风险偏好值获取失败")
-//                    .build();
-//        }
-//    }
+    @GetMapping("/antiRisk")
+    public HttpResponse getAnswerAntiRiskByQuestion(@RequestBody Question question) {
+        Integer antiRiskValue = answerService.findAnswerAntiRiskByQuestion(question);
+        if (antiRiskValue != null) {
+            return HttpResponse.builder()
+                    .code(200)
+                    .message("成功获取对应问题答案的风险偏好值")
+                    .data(antiRiskValue)
+                    .build();
+        } else {
+            return HttpResponse.builder()
+                    .code(0)
+                    .message("风险偏好值获取失败")
+                    .build();
+        }
+    }
 
 }

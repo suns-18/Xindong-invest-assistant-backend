@@ -27,7 +27,7 @@ public class ProductController {
     public HttpResponse getProductsSortedByRisk() {
         List<Product> products = productService.sortProductByRisk();
         return HttpResponse.builder()
-                .code(1)
+                .code(200)
                 .message("Products successfully sorted by risk")
                 .data(products)
                 .build();
@@ -38,7 +38,7 @@ public class ProductController {
     public HttpResponse getProductsSortedByFlexibility() {
         List<Product> products = productService.sortProductByFlexibility();
         return HttpResponse.builder()
-                .code(1)
+                .code(200)
                 .message("Products successfully sorted by flexibility")
                 .data(products)
                 .build();
@@ -48,7 +48,7 @@ public class ProductController {
     public HttpResponse getProductsSortedByReturn() {
         List<Product> products = productService.sortProductByReturn();
         return HttpResponse.builder()
-                .code(1)
+                .code(200)
                 .message("Products successfully sorted by return rate")
                 .data(products)
                 .build();
@@ -58,10 +58,9 @@ public class ProductController {
     @PostMapping("/sortByComprehensive")
     public HttpResponse getProductsSortedByComprehensive(@RequestBody Product product, @RequestBody Answer answer) {
         List<Product> products;
-
         products =productService.sortProductByComprehensive(product, answer);
         return HttpResponse.builder()
-                .code(1)
+                .code(200)
                 .message("Products successfully sorted by comprehensive criteria")
                 .data(products)
                 .build();

@@ -22,10 +22,6 @@ public class QuestionOptionServiceImpl
                 .eq("question", question)
                 .list();
     }
-    @Override
-    public boolean save(QuestionOption entity) {
-        return false;
-    }
     /**Code by ryr
      * get key question's userOption
      * @param answer

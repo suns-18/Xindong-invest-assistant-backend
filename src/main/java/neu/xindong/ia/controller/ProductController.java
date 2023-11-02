@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("./api/product")
 public class ProductController {
     @Autowired
-    private ProductServiceImpl productService;
+    private ProductService productService;
 
 //    @GetMapping(value = "/queryByProductId",method= RequestMethod.POST)
 //    public HttpResponse queryList(@RequestBody Product product){

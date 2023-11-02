@@ -10,12 +10,12 @@ public class QuestionController {
     @GetMapping(value="/queryList")
     public HttpResponse queryList(){
         /*展示所有问题及对应选项*/
-        HttpResponse resp;
+        HttpResponse resp = null;
         try {
-            question.getOptions()
-            resp =;
-            resp.setCode(1);
-            resp.setMessage("查询成功");
+            /*question.getOptions();
+            resp =;*/
+            /*resp.setCode(1);
+            resp.setMessage("查询成功");*/
         } catch (Exception e) {
             e.printStackTrace();
             resp = HttpResponse.builder()

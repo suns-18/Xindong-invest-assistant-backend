@@ -56,7 +56,8 @@ public class ProductController {
 
     // 获取综合排序的产品
     @PostMapping("/sortByComprehensive")
-    public HttpResponse getProductsSortedByComprehensive(@RequestBody Product product, @RequestBody Answer answer) {
+    public HttpResponse getProductsSortedByComprehensive(@RequestBody Product product,
+                                                         @RequestBody Answer answer) {
         List<Product> products;
         products =productService.sortProductByComprehensive(product, answer);
         return HttpResponse.builder()

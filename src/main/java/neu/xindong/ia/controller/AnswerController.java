@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("./api/answer")
+@RequestMapping("/api/answer")
 public class AnswerController {
     @Autowired
     private AnswerService answerService;

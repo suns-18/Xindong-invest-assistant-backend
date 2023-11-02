@@ -11,7 +11,7 @@
  Target Server Version : 80032
  File Encoding         : 65001
 
- Date: 01/11/2023 18:57:50
+ Date: 02/11/2023 18:43:38
 */
 
 SET NAMES utf8mb4;
@@ -22,10 +22,10 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `answer`;
 CREATE TABLE `answer`  (
-                           `id` int NOT NULL,
-                           `question` int NULL DEFAULT NULL,
-                           `option` int NULL DEFAULT NULL,
-                           PRIMARY KEY (`id`) USING BTREE
+  `id` int NOT NULL,
+  `question` int NULL DEFAULT NULL,
+  `option` int NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -37,11 +37,11 @@ CREATE TABLE `answer`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `possession`;
 CREATE TABLE `possession`  (
-                               `id` int NOT NULL,
-                               `product_id` int NULL DEFAULT NULL,
-                               `purchase_price` decimal(10, 2) NULL DEFAULT NULL,
-                               `amount` int NULL DEFAULT NULL,
-                               PRIMARY KEY (`id`) USING BTREE
+  `id` int NOT NULL,
+  `product_id` int NULL DEFAULT NULL,
+  `purchase_price` decimal(10, 2) NULL DEFAULT NULL,
+  `amount` int NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -53,14 +53,14 @@ CREATE TABLE `possession`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product`  (
-                            `id` int NULL DEFAULT NULL,
-                            `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-                            `details` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
-                            `price` decimal(10, 2) NULL DEFAULT NULL,
-                            `anti_risk` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-                            `flexibility` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-                            `return_rate` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-                            `state` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL
+  `id` int NULL DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `details` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
+  `price` decimal(10, 2) NULL DEFAULT NULL,
+  `anti_risk` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `flexibility` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `return_rate` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `state` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -84,49 +84,123 @@ INSERT INTO `product` VALUES (1001, 'Orxnge mini', 'How we spend our days is, of
 -- ----------------------------
 DROP TABLE IF EXISTS `question_option`;
 CREATE TABLE `question_option`  (
-                                    `id` int NOT NULL,
-                                    `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-                                    `question` int NULL DEFAULT NULL,
-                                    `value` int NULL DEFAULT NULL,
-                                    `question_type` int NULL DEFAULT NULL,
-                                    PRIMARY KEY (`id`) USING BTREE
+  `id` int NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `question` int NULL DEFAULT NULL,
+  `value` int NULL DEFAULT NULL,
+  `question_type` int NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of question_option
 -- ----------------------------
+INSERT INTO `question_option` VALUES (1, '照顾自己', 1, 0, 3);
+INSERT INTO `question_option` VALUES (2, '照顾另一半', 1, 0, 3);
+INSERT INTO `question_option` VALUES (3, '抚养孩子', 1, 0, 3);
+INSERT INTO `question_option` VALUES (4, '赡养老人', 1, 0, 3);
+INSERT INTO `question_option` VALUES (5, '是', 2, 0, 3);
+INSERT INTO `question_option` VALUES (6, '否', 2, 0, 3);
+INSERT INTO `question_option` VALUES (7, '低', 3, 1, 0);
+INSERT INTO `question_option` VALUES (8, '中低', 3, 2, 0);
+INSERT INTO `question_option` VALUES (9, '中', 3, 3, 0);
+INSERT INTO `question_option` VALUES (10, '中高', 3, 4, 0);
+INSERT INTO `question_option` VALUES (11, '高', 3, 5, 0);
+INSERT INTO `question_option` VALUES (12, '尽可能保证本金安全，收益无所谓', 4, 1, 1);
+INSERT INTO `question_option` VALUES (13, '追求一定收益', 4, 2, 1);
+INSERT INTO `question_option` VALUES (14, '追求较多的收益产生', 4, 3, 1);
+INSERT INTO `question_option` VALUES (15, '实现资产的大幅增长', 4, 4, 1);
+INSERT INTO `question_option` VALUES (16, '1年以内', 5, 0, 3);
+INSERT INTO `question_option` VALUES (17, '1-3年', 5, 0, 3);
+INSERT INTO `question_option` VALUES (18, '3-5年', 5, 0, 3);
+INSERT INTO `question_option` VALUES (19, '5年以上', 5, 0, 3);
+INSERT INTO `question_option` VALUES (20, '存款及国债', 6, 0, 3);
+INSERT INTO `question_option` VALUES (21, '固定收益类', 6, 0, 3);
+INSERT INTO `question_option` VALUES (22, '权益类', 6, 0, 3);
+INSERT INTO `question_option` VALUES (23, '商品及衍生品类或其他高风险产品', 6, 0, 3);
+INSERT INTO `question_option` VALUES (24, '有限', 7, 0, 3);
+INSERT INTO `question_option` VALUES (25, '一般', 7, 0, 3);
+INSERT INTO `question_option` VALUES (26, '丰富', 7, 0, 3);
+INSERT INTO `question_option` VALUES (27, '1年以下', 8, 0, 3);
+INSERT INTO `question_option` VALUES (28, '1-3年', 8, 0, 3);
+INSERT INTO `question_option` VALUES (29, '3-5年', 8, 0, 3);
+INSERT INTO `question_option` VALUES (30, '5年以上', 8, 0, 3);
+INSERT INTO `question_option` VALUES (31, '除了银行储蓄外，基本没有其他投资经验', 9, 0, 3);
+INSERT INTO `question_option` VALUES (32, '购买过债券、保险等理财产品', 9, 0, 3);
+INSERT INTO `question_option` VALUES (33, '参与过股票、基金等产品的交易', 9, 0, 3);
+INSERT INTO `question_option` VALUES (34, '参与过权证、期货、期权等产品的交易', 9, 0, 3);
+INSERT INTO `question_option` VALUES (35, '还信用卡等消费贷', 10, 0, 3);
+INSERT INTO `question_option` VALUES (36, ' 还车贷', 10, 0, 3);
+INSERT INTO `question_option` VALUES (37, '还房贷', 10, 0, 3);
+INSERT INTO `question_option` VALUES (38, '日常花销', 10, 0, 3);
+INSERT INTO `question_option` VALUES (39, '1万以下', 11, 0, 3);
+INSERT INTO `question_option` VALUES (40, '1-5万', 11, 0, 3);
+INSERT INTO `question_option` VALUES (41, '5-10万', 11, 0, 3);
+INSERT INTO `question_option` VALUES (42, '10-30万', 11, 0, 3);
+INSERT INTO `question_option` VALUES (43, ' 30-100万', 11, 0, 3);
+INSERT INTO `question_option` VALUES (44, '100万以上', 11, 0, 3);
+INSERT INTO `question_option` VALUES (45, '工资奖金、劳务报酬', 13, 0, 3);
+INSERT INTO `question_option` VALUES (46, '生产经营所得 ', 13, 0, 3);
+INSERT INTO `question_option` VALUES (47, '利息、股息、转让等金融性资产收入', 13, 0, 3);
+INSERT INTO `question_option` VALUES (48, '出租、出售房地产等非金融性资产收入', 13, 0, 3);
+INSERT INTO `question_option` VALUES (49, '其他', 13, 0, 3);
+INSERT INTO `question_option` VALUES (50, '5-10', 12, 0, 3);
+INSERT INTO `question_option` VALUES (51, '10-30', 12, 0, 3);
+INSERT INTO `question_option` VALUES (52, '30-50', 12, 0, 3);
+INSERT INTO `question_option` VALUES (53, '50-100', 12, 0, 3);
+INSERT INTO `question_option` VALUES (54, '100万以上', 12, 0, 3);
+INSERT INTO `question_option` VALUES (55, '党政机关及事业单位', 14, 6, 2);
+INSERT INTO `question_option` VALUES (56, '一般企业单位', 14, 5, 2);
+INSERT INTO `question_option` VALUES (57, '蓝领', 14, 4, 2);
+INSERT INTO `question_option` VALUES (58, '在校学生', 14, 2, 2);
+INSERT INTO `question_option` VALUES (59, '无固定职业', 14, 1, 2);
+INSERT INTO `question_option` VALUES (60, '自由职业 ', 14, 3, 2);
 
 -- ----------------------------
 -- Table structure for question_title
 -- ----------------------------
 DROP TABLE IF EXISTS `question_title`;
 CREATE TABLE `question_title`  (
-                                   `id` int NOT NULL,
-                                   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-                                   PRIMARY KEY (`id`) USING BTREE
+  `id` int NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of question_title
 -- ----------------------------
+INSERT INTO `question_title` VALUES (1, '你要照顾的人？');
+INSERT INTO `question_title` VALUES (2, '是否有境外税收居民身份？');
+INSERT INTO `question_title` VALUES (3, '您投资中对风险波动的厌恶有何种程度？');
+INSERT INTO `question_title` VALUES (4, '投资目标是 ');
+INSERT INTO `question_title` VALUES (5, '您可接收的最长投资期限为？');
+INSERT INTO `question_title` VALUES (6, '您想投资什么产品？（多选）');
+INSERT INTO `question_title` VALUES (7, '您的投资知识可描述为');
+INSERT INTO `question_title` VALUES (8, '有多少年投资经验');
+INSERT INTO `question_title` VALUES (9, '投资经验有哪些（多选）');
+INSERT INTO `question_title` VALUES (10, '每月钱花哪了（多选）');
+INSERT INTO `question_title` VALUES (11, '家庭收入有多少钱用于投资？');
+INSERT INTO `question_title` VALUES (12, '家庭可支配年收入为？');
+INSERT INTO `question_title` VALUES (13, '收入主要来自？');
+INSERT INTO `question_title` VALUES (14, '工作是什么？');
 
 -- ----------------------------
 -- Table structure for trade_record
 -- ----------------------------
 DROP TABLE IF EXISTS `trade_record`;
 CREATE TABLE `trade_record`  (
-                                 `id` int NOT NULL,
-                                 `product_id` int NULL DEFAULT NULL,
-                                 `purchase_price` decimal(10, 2) NULL DEFAULT NULL,
-                                 `amount` int NULL DEFAULT NULL,
-                                 `sold` int NULL DEFAULT NULL,
-                                 `deal_time` datetime NULL DEFAULT NULL,
-                                 PRIMARY KEY (`id`) USING BTREE
+  `id` int NOT NULL,
+  `product_id` int NULL DEFAULT NULL,
+  `purchase_price` decimal(10, 2) NULL DEFAULT NULL,
+  `amount` int NULL DEFAULT NULL,
+  `deal_time` datetime NULL DEFAULT NULL,
+  `sold` int NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of trade_record
 -- ----------------------------
-INSERT INTO `trade_record` VALUES (1, 1, 1.00, 1, 1,'2023-11-07 18:44:09');
+INSERT INTO `trade_record` VALUES (1, 1, 1.00, 1, '2023-11-07 18:44:09', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -26,6 +26,7 @@
 | price      | decimal(.2) | 交易价格      |
 | amount     | int         | 交易数量      |
 | deal_time  | datetime    | 交易时间      |
+|sold|int|是否卖出（0假1真）|
 
 ## 3. question_title
 

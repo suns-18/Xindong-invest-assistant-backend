@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import neu.xindong.ia.dao.AnswerDao;
 import neu.xindong.ia.dto.Question;
 import neu.xindong.ia.entity.Answer;
+import neu.xindong.ia.entity.QuestionTitle;
 import neu.xindong.ia.service.AnswerService;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -45,7 +46,7 @@ public class AnswerServiceImpl extends ServiceImpl<AnswerDao, Answer>
     }
 
     @Override
-    public Integer findAnswerAntiRiskByQuestion(Question question) {
+    public Integer findAnswerAntiRiskByQuestion(QuestionTitle questionTitle) {
         return null;
     }
 }

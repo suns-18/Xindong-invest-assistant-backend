@@ -16,5 +16,4 @@ public interface AnswerService extends IService<Answer> {
 
     Integer findAnswerAntiRiskByQuestion(QuestionTitle questionTitle);
 
-    Integer findAnswerAntiRiskByQuestion(Question question);
 }

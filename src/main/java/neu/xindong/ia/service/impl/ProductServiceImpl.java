@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class ProductServiceImpl extends ServiceImpl<ProductDao, Product>
         implements ProductService {
-    List<Product> findAll() {
+    public List<Product> findAll() {
         return list();
     }
 

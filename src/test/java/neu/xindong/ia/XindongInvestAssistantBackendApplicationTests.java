@@ -33,9 +33,8 @@ class XindongInvestAssistantBackendApplicationTests {
     /*对questionController的测试*/
     @Test
     void Question(){
-        Assertions.assertEquals(questionController.queryList(), null
-                , "Project模块>>列表请求测试1：返回所有，未通过");
-        log.info("Project模块>>列表请求测试1：返回所有，通过");
+        Assertions.assertNotNull(questionController.queryList(),"Project模块>>列表请求测试1：返回所有，未通过");
+        log.info("Project模块>>列表请求测 试1：返回所有，通过");
         log.info("Question模块>>列表请求测试通过");
     }
 }

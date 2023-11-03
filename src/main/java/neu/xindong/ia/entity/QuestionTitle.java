@@ -3,6 +3,7 @@ package neu.xindong.ia.entity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.ToString;
 
 // 加上@Data注解，自动帮你生成Getter和Setter
 // 加上@TableName注解，括号里写上表的名字
@@ -11,6 +12,7 @@ import lombok.Data;
 // 变量名是小驼峰
 @Data
 @TableName("question_title")
+@ToString
 public class QuestionTitle {
     @TableId
     private Integer id;

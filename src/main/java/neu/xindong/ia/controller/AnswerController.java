@@ -1,6 +1,7 @@
 package neu.xindong.ia.controller;
 
 import neu.xindong.ia.dto.HttpResponse;
+import neu.xindong.ia.dto.Question;
 import neu.xindong.ia.entity.Answer;
 import neu.xindong.ia.entity.QuestionTitle;
 import neu.xindong.ia.service.AnswerService;

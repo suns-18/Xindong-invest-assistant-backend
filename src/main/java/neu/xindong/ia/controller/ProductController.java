@@ -7,9 +7,10 @@ import neu.xindong.ia.entity.QuestionOption;
 import neu.xindong.ia.service.AnswerService;
 import neu.xindong.ia.service.ProductService;
 import neu.xindong.ia.service.QuestionOptionService;
-import neu.xindong.ia.service.impl.ProductServiceImpl;
+import neu.xindong.ia.utils.Enums;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,14 +70,16 @@ public class ProductController {
     public HttpResponse getProductsSortedByComprehensive() {
         List<Product> products;
         List<Answer> answers;
-        List<QuestionOption> optionsAntiRisk= new ArrayList<>();
-        List<QuestionOption> optionsStability= new ArrayList<>();
-        List<QuestionOption> optionsReturn= new ArrayList<>();
+
+
+        List<QuestionOption> optionsAntiRisk = new ArrayList<>();
+        List<QuestionOption> optionsStability = new ArrayList<>();
+        List<QuestionOption> optionsReturn = new ArrayList<>();
 
         answers = answerService.findAll();
-        answers.forEach(e->{
-            var o= optionService.getById(e.getOption());
-            switch (o.getQuestionType()){
+        answers.forEach(e -> {
+            var o = optionService.getById(e.getOption());
+            switch (o.getQuestionType()) {
                 case 0:
                     optionsAntiRisk.add(o);
                     break;
@@ -90,7 +93,8 @@ public class ProductController {
         });
 
 
-        products =productService.sortProductByComprehensive(optionsAntiRisk,optionsStability,optionsReturn);
+        products = productService.sortProductByComprehensive(
+                optionsAntiRisk, optionsStability, optionsReturn);
         return HttpResponse.builder()
                 .code(200)
                 .message("Products successfully sorted by comprehensive criteria")

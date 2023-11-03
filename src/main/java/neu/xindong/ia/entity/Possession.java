@@ -12,5 +12,5 @@ public class Possession {
     private Integer productId;
     private Double purchasePrice;
     private Integer amount;
-    private Boolean sold;
+    private Integer sold;
 }

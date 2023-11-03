@@ -1,5 +1,6 @@
 package neu.xindong.ia;
 
+import jakarta.annotation.Resource;
 import neu.xindong.ia.controller.QuestionController;
 import neu.xindong.ia.entity.*;
 import neu.xindong.ia.service.PossessionService;
@@ -45,9 +46,11 @@ class XindongInvestAssistantBackendApplicationTests {
         log.info("Question模块>>列表请求测试通过");
     }
 
-
+    @Resource
     private PossessionServiceImpl possessionService;
+    @Resource
     private QuestionTitleServiceImpl questionTitleService;
+    @Resource
     private QuestionOptionServiceImpl questionOptionService;
 
     /**
@@ -67,7 +70,7 @@ class XindongInvestAssistantBackendApplicationTests {
 
     /**
      * 测试possessionService
-     * 测试增加一条持仓记录成功
+     * 测试增加一条持仓记录，成功
      * 测试用例为：tradeRecord的产品id是持仓表中没有的产品
      */
     @Test
@@ -85,7 +88,7 @@ class XindongInvestAssistantBackendApplicationTests {
     }
     /**
      * 测试possessionService
-     * 测试增加一条持仓记录失败
+     * 测试增加一条持仓记录，失败
      * 测试用例为：tradeRecord的产品id是持仓表中已存在的持仓产品
      */
     @Test
@@ -129,8 +132,8 @@ class XindongInvestAssistantBackendApplicationTests {
     public void testUpdatePossessionWhenSell2(){
         TradeRecord tradeRecord = new TradeRecord();
         tradeRecord.setProductId(2);
-        tradeRecord.setPrice(848.35);//假设涨了100，原价748.35
-        tradeRecord.setAmount(5);//买出数量≤持有数量
+        tradeRecord.setPrice(48.35);//假设涨了100，原价748.35
+        tradeRecord.setAmount(5);//卖出数量≤持有数量
         tradeRecord.setSold(1);
         if(!possessionService.updatePossessionWhenSell(tradeRecord)){
             System.out.println("Failed to update possession when sell!");

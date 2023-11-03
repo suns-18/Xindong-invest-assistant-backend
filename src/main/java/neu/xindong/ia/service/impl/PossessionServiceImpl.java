@@ -48,12 +48,12 @@ public class PossessionServiceImpl extends ServiceImpl<PossessionDao, Possession
 
         List<Possession> possessionList = query().eq("sold","0").list();
         for (Possession possessionItem : possessionList){
-            //对于买入交易，如果产品id不同，增加新的持仓记录
-            if(!tradeRecord.getProductId().equals(possessionItem.getProductId())){
-                return save(possession);
+            //对于买入交易，如果产品id相同，则不增加新的持仓记录
+            if(tradeRecord.getProductId().equals(possessionItem.getProductId())){
+                return false;
             }
         }
-        return false;
+        return save(possession);
     }
 
     /**

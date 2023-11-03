@@ -28,7 +28,8 @@ public class QuestionOptionServiceImpl
      * @return
      */
     public QuestionOption findOptionValueByAnswer(Answer answer){
-        return query().eq("id",answer.getOption()).getEntity();
+//        return query().eq("id",answer.getOption()).getEntity();
+        return  getById(answer.getOption());
     }
 
 }

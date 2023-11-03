@@ -11,15 +11,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-
+@RunWith(SpringRunner.class)
 @SpringBootTest
 public class TradeRecordServiceTest {
     @Autowired
     private TradeRecordServiceImpl tradeRecordService;
     @Test
     public void findAllTest() {
-        Integer tradeRecord=1;
-        System.out.printf("tradeRecode:"+tradeRecordService.findAll(tradeRecord));
+        System.out.printf("tradeRecode:"+tradeRecordService.findAll());
     }
     @Test
     public void findTradeRecordByProductIdTest(){

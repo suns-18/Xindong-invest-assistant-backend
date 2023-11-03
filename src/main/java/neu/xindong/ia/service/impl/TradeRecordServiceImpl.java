@@ -13,10 +13,8 @@ public class TradeRecordServiceImpl extends ServiceImpl<TradeRecordDao, TradeRec
      * trade list
      * @return
      */
-    public List<TradeRecord> findAll(Integer tradeRecord) {
-        return query()
-                .eq("tradeRecord", tradeRecord)
-                .list();
+    public List<TradeRecord> findAll() {
+        return query().list();
     }
 
     /**code by ryr

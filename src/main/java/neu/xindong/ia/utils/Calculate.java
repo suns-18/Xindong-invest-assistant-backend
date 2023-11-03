@@ -45,8 +45,8 @@ public class Calculate {
 
         productList.forEach(e->{
             var com = new ProductCom();
-            var product = com.getProduct();
-
+//            var product = com.getProduct();
+            var product=new Product();
             product.setId(e.getId());
             product.setName(e.getName());
             product.setDetails(e.getDetails());
@@ -60,6 +60,8 @@ public class Calculate {
             com.setComprehensive((Math.abs(optionAntiRisk-e.getAntiRisk()))/optionAntiRisk
                     +(Math.abs(optionStability-e.getFlexibility()))/optionStability
                     +(Math.abs(optionReturn-e.getReturnRate()))/optionReturn);
+
+            com.setProduct(product);
 
             productComList.add(com);
         });

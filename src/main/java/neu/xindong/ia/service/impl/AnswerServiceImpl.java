@@ -26,7 +26,7 @@ public class AnswerServiceImpl extends ServiceImpl<AnswerDao, Answer>
      * @return
      */
     public Answer findAntiRiskQuestionFromAnswer(){
-        return query().eq("question",3).getEntity();
+        return query().eq("question",3).list().get(0);
     }
 
     /**Code by ryr
@@ -34,7 +34,7 @@ public class AnswerServiceImpl extends ServiceImpl<AnswerDao, Answer>
      * @return
      */
     public Answer findStabilityQuestionFromAnswer(){
-        return query().eq("question",14).getEntity();
+        return query().eq("question",14).list().get(0);
     }
 
     /**Code by ryr
@@ -42,7 +42,7 @@ public class AnswerServiceImpl extends ServiceImpl<AnswerDao, Answer>
      * @return
      */
     public Answer findReturnRateQuestionFromAnswer(){
-        return query().eq("question",4).getEntity();
+        return query().eq("question",4).list().get(0);
     }
 
     @Override

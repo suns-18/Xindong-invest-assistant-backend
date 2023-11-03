@@ -6,11 +6,14 @@ import neu.xindong.ia.entity.QuestionOption;
 import neu.xindong.ia.service.impl.ProductServiceImpl;
 import neu.xindong.ia.service.impl.QuestionOptionServiceImpl;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
 import java.util.List;
 
-
+@RunWith(SpringRunner.class)
 @SpringBootTest
 public class ProductServiceTest {
     @Autowired
@@ -74,6 +77,7 @@ public class ProductServiceTest {
         List<QuestionOption> optionAntiRisk=questionOptionService.findQuestionOptionsByQuestion(3);
         List<QuestionOption> optionStability=questionOptionService.findQuestionOptionsByQuestion(14);
         List<QuestionOption> optionReturn=questionOptionService.findQuestionOptionsByQuestion(4);
+
         List<ProductCom> productComList=productService.sortProductByComprehensive(optionAntiRisk,optionStability,optionReturn);
         for(ProductCom productCom:productComList){
             System.out.printf("comprehensive: "+productCom.getComprehensive());

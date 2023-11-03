@@ -48,7 +48,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductDao, Product>
      *
      * @return
      */
-    public List<Product> sortProductByReturnRate() {
+    public List<Product> sortProductByReturn() {
         List<Product> result = query().orderBy(true, false, "return_rate").list();
         return result;
     }

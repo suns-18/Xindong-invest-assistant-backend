@@ -11,20 +11,17 @@ import java.util.List;
 public class Calculate {
     /**code by ryr
      * calculate comprehensive
-     * @param questionOptionAntiRisk
-     * @param questionOptionStability
-     * @param questionOptionReturn
+     * @param optionAntiRisk
+     * @param optionStability
+     * @param optionReturn
      * @param productList
      * @return
      */
-    public static List<ProductCom> calculateComprehensive(QuestionOption questionOptionAntiRisk,
-                                         QuestionOption questionOptionStability,
-                                         QuestionOption questionOptionReturn,
+    public static List<ProductCom> calculateComprehensive(Integer optionAntiRisk,
+                                                          Integer optionStability,
+                                                          Integer optionReturn,
                                          List<Product> productList){
 
-        int optionAntiRiskValue=questionOptionAntiRisk.getValue();
-        int optionStabilityValue=questionOptionStability.getValue();
-        int optionReturnValue=questionOptionReturn.getValue();
 
         double anti_risk;
         double flexibility;
@@ -37,9 +34,9 @@ public class Calculate {
             anti_risk=product.getAnti_risk();
             flexibility=product.getFlexibility();
             return_rate=product.getReturn_rate();
-            comprehensive=(Math.abs(anti_risk_value-anti_risk))/anti_risk_value
-                    +(Math.abs(stability_value-flexibility))/stability_value
-                    +(Math.abs(return_rate_value-return_rate))/return_rate_value;
+            comprehensive=(Math.abs(anti_risk_-anti_risk))/anti_risk_
+                    +(Math.abs(stability_-flexibility))/stability_
+                    +(Math.abs(return_rate_-return_rate))/return_rate_;
             ProductCom productComTemp=new ProductCom();
             productComTemp.setProduct(product);
             productComTemp.setComprehensive(comprehensive);
@@ -60,9 +57,9 @@ public class Calculate {
             product.setReturnRate(e.getReturnRate());
             product.setState(e.getState());
 
-            com.setComprehensive((Math.abs(optionAntiRiskValue-e.getAntiRisk()))/optionAntiRiskValue
-                    +(Math.abs(optionStabilityValue-e.getFlexibility()))/optionStabilityValue
-                    +(Math.abs(optionReturnValue-e.getReturnRate()))/optionReturnValue);
+            com.setComprehensive((Math.abs(optionAntiRisk-e.getAntiRisk()))/optionAntiRisk
+                    +(Math.abs(optionStability-e.getFlexibility()))/optionStability
+                    +(Math.abs(optionReturn-e.getReturnRate()))/optionReturn);
 
             productComList.add(com);
         });

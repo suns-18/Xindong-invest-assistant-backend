@@ -1,7 +1,9 @@
 package neu.xindong.ia.controller;
 
 import neu.xindong.ia.dto.HttpResponse;
+import neu.xindong.ia.dto.Question;
 import neu.xindong.ia.entity.Answer;
+import neu.xindong.ia.entity.QuestionTitle;
 import neu.xindong.ia.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +32,7 @@ public class AnswerController {
 
     // 根据问题ID获取答案的风险偏好值
     @GetMapping("/antiRisk")
-    public HttpResponse getAnswerAntiRiskByQuestion(@RequestBody Question question) {
+    public HttpResponse getAnswerAntiRiskByQuestion(@RequestBody QuestionTitle question) {
         Integer antiRiskValue = answerService.findAnswerAntiRiskByQuestion(question);
         if (antiRiskValue != null) {
             return HttpResponse.builder()

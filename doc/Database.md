@@ -46,7 +46,7 @@
 | question      | int          | 对应问题id |
 | title         | varchar(255) | 选项描述   |
 | value         | int          | 选项对应分值 |
-| question_type | int          | 对应指标   |
+| question_type | int          | 对应指标 anti_risk:0 return_rate:1 flexibility:2 其他问题:3 |
 
 ## 5. answer
 

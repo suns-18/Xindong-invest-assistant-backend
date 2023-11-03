@@ -15,4 +15,6 @@ public interface AnswerService extends IService<Answer> {
     Answer findReturnRateQuestionFromAnswer();
 
     Integer findAnswerAntiRiskByQuestion(QuestionTitle questionTitle);
+
+    Integer findAnswerAntiRiskByQuestion(Question question);
 }

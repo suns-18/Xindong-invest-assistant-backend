@@ -2,9 +2,11 @@ package neu.xindong.ia.entity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @TableName("product")
+@ToString
 public class Product {
     @TableId
     private Integer id;

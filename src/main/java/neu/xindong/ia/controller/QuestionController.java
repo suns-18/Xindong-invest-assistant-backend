@@ -6,6 +6,7 @@ import neu.xindong.ia.entity.QuestionOption;
 import neu.xindong.ia.entity.QuestionTitle;
 import neu.xindong.ia.service.impl.QuestionOptionServiceImpl;
 import neu.xindong.ia.service.impl.QuestionTitleServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -13,7 +14,9 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("/api/question")
 public class QuestionController {
+    @Autowired
     private QuestionOptionServiceImpl questionOptionService;
+    @Autowired
     private QuestionTitleServiceImpl questionTitleService;
     @GetMapping(value="/queryList")
     public HttpResponse queryList(){
@@ -28,7 +31,7 @@ public class QuestionController {
                 for (QuestionOption questionOption:options){
                     if(questionTitle.getId().equals(questionOption.getQuestion())){
                         question.setTitle(questionTitle);
-                        question.setOptions(questionOption);
+                        question.getOptions().add(questionOption);
                         questionList.add(question);
                     }
                 }

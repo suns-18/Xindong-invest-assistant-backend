@@ -4,8 +4,10 @@ import lombok.Data;
 import neu.xindong.ia.entity.QuestionOption;
 import neu.xindong.ia.entity.QuestionTitle;
 
+import java.util.List;
+
 @Data
 public class Question {
     private QuestionTitle title;
-    private QuestionOption options;
+    private List<QuestionOption> options;
 }

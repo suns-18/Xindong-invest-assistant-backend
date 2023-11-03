@@ -22,17 +22,10 @@ import static net.sf.jsqlparser.parser.feature.Feature.insert;
 public class PossessionServiceImpl extends ServiceImpl<PossessionDao, Possession>
         implements PossessionService {
     /**
-     *查询所有持仓信息。（根据是否售出查询）
+     *查询所有持仓信息。（根据是否售出查询）数据库此时没有sold属性
      */
     public List<Possession> findAll(){
-        List<Possession> possessionList = query().eq("sold","0").list();
-        List<Possession> result = new ArrayList<>();
-        for (Possession possession : possessionList){
-            if(!possession.getSold()){
-                result.add(possession);
-            }
-        }
-        return result;
+        return query().eq("sold","0").list();
     }
 
     /**
@@ -97,8 +90,7 @@ public class PossessionServiceImpl extends ServiceImpl<PossessionDao, Possession
                         possession.setSold(true);
                     }
                     //更新数据库
-                    updateById(possession);
-                    return true;
+                    return updateById(possession);
                 }
             }
         }
@@ -128,8 +120,7 @@ public class PossessionServiceImpl extends ServiceImpl<PossessionDao, Possession
                 double currentCost = allCost/Double.valueOf(currentAmount);
                 possession.setPurchasePrice(currentCost);
                 //更新数据库
-                updateById(possession);
-                return true;
+                return updateById(possession);
             }
         }
         return false;

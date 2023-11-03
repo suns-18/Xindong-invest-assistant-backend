@@ -1,6 +1,7 @@
 package neu.xindong.ia.controller;
 
 import neu.xindong.ia.dto.HttpResponse;
+import neu.xindong.ia.dto.ProductCom;
 import neu.xindong.ia.entity.Answer;
 import neu.xindong.ia.entity.Product;
 import neu.xindong.ia.entity.QuestionOption;
@@ -68,7 +69,7 @@ public class ProductController {
     // 获取综合排序的产品
     @PostMapping("/sortByComprehensive")
     public HttpResponse getProductsSortedByComprehensive() {
-        List<Product> products;
+        List<ProductCom> products;
         List<Answer> answers;
 
 
@@ -80,15 +81,9 @@ public class ProductController {
         answers.forEach(e -> {
             var o = optionService.getById(e.getOption());
             switch (o.getQuestionType()) {
-                case 0:
-                    optionsAntiRisk.add(o);
-                    break;
-                case 1:
-                    optionsStability.add(o);
-                    break;
-                case 2:
-                    optionsReturn.add(o);
-                    break;
+                case 0 -> optionsAntiRisk.add(o);
+                case 1 -> optionsStability.add(o);
+                case 2 -> optionsReturn.add(o);
             }
         });
 

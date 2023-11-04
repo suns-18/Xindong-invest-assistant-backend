@@ -21,4 +21,5 @@ public interface ProductService extends IService<Product> {
     List<ProductCom> sortProductByComprehensive(List<QuestionOption> questionOptionAntiRisk,
                                                 List<QuestionOption> questionOptionStability,
                                                 List<QuestionOption> questionOptionReturn);
+    List<Product> findAll();
 }

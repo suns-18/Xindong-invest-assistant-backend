@@ -28,73 +28,131 @@ public class ProductController {
     @Autowired
     private QuestionOptionService optionService;
 
-//    @GetMapping(value = "/queryByProductId",method= RequestMethod.POST)
-//    public HttpResponse queryList(@RequestBody Product product){
-//        HttpResponse resp;
-//
-//    }
+
+    @GetMapping("/all")
+    public HttpResponse getAllProducts(){
+        List<Product> products = productService.findAll();
+        return HttpResponse.builder()
+                .code(200)
+                .data(products)
+                .build();
+    }
 
     // 获取按风险排序的产品
     @GetMapping(value = "/sortByRisk")
     public HttpResponse getProductsSortedByRisk() {
-        List<Product> products = productService.sortProductByRisk();
-        return HttpResponse.builder()
-                .code(200)
-                .message("Products successfully sorted by risk")
-                .data(products)
-                .build();
+        try {
+            List<Product> products = productService.sortProductByRisk();
+            if (products != null){
+                return HttpResponse.builder()
+                        .code(200)
+                        .message("按风险排序成功")
+                        .data(products)
+                        .build();
+            } else{
+                return HttpResponse.builder()
+                        .code(0)
+                        .message("按风险排序失败")
+                        .build();
+            }
+        } catch (Exception e) {
+            return HttpResponse.builder()
+                    .code(0)
+                    .message("数据库访问错误")
+                    .build();
+        }
     }
 
     // 获取按灵活性排序的产品
     @GetMapping("/sortByFlexibility")
     public HttpResponse getProductsSortedByFlexibility() {
-        List<Product> products = productService.sortProductByFlexibility();
-        return HttpResponse.builder()
-                .code(200)
-                .message("Products successfully sorted by flexibility")
-                .data(products)
-                .build();
+        try {
+            List<Product> products = productService.sortProductByFlexibility();
+            if (products != null){
+                return HttpResponse.builder()
+                        .code(200)
+                        .message("按灵活性排序成功")
+                        .data(products)
+                        .build();
+            } else{
+                return HttpResponse.builder()
+                        .code(0)
+                        .message("按灵活性排序失败")
+                        .build();
+            }
+        } catch (Exception e) {
+            return HttpResponse.builder()
+                    .code(0)
+                    .message("数据库访问错误")
+                    .build();
+        }
     }
 
     @GetMapping("/sortByReturn")
     public HttpResponse getProductsSortedByReturn() {
-        List<Product> products = productService.sortProductByReturn();
-        return HttpResponse.builder()
-                .code(200)
-                .message("Products successfully sorted by return rate")
-                .data(products)
-                .build();
+        try {
+            List<Product> products = productService.sortProductByReturn();
+            if (products != null){
+                return HttpResponse.builder()
+                        .code(200)
+                        .message("按收益率排序成功")
+                        .data(products)
+                        .build();
+            } else{
+                return HttpResponse.builder()
+                        .code(0)
+                        .message("按收益率排序失败")
+                        .build();
+            }
+        } catch (Exception e) {
+            return HttpResponse.builder()
+                    .code(0)
+                    .message("数据库访问错误")
+                    .build();
+        }
     }
 
     // 获取综合排序的产品
     @PostMapping("/sortByComprehensive")
     public HttpResponse getProductsSortedByComprehensive() {
-        List<ProductCom> products;
-        List<Answer> answers;
+        try {
+            List<ProductCom> products;
+            List<Answer> answers;
 
+            List<QuestionOption> optionsAntiRisk = new ArrayList<>();
+            List<QuestionOption> optionsStability = new ArrayList<>();
+            List<QuestionOption> optionsReturn = new ArrayList<>();
 
-        List<QuestionOption> optionsAntiRisk = new ArrayList<>();
-        List<QuestionOption> optionsStability = new ArrayList<>();
-        List<QuestionOption> optionsReturn = new ArrayList<>();
+            answers = answerService.findAll();
+            answers.forEach(e -> {
+                var o = optionService.getById(e.getOption());
+                switch (o.getQuestionType()) {
+                    case 0 -> optionsAntiRisk.add(o);
+                    case 1 -> optionsStability.add(o);
+                    case 2 -> optionsReturn.add(o);
+                }
+            });
 
-        answers = answerService.findAll();
-        answers.forEach(e -> {
-            var o = optionService.getById(e.getOption());
-            switch (o.getQuestionType()) {
-                case 0 -> optionsAntiRisk.add(o);
-                case 1 -> optionsStability.add(o);
-                case 2 -> optionsReturn.add(o);
+            products = productService.sortProductByComprehensive(
+                    optionsAntiRisk, optionsStability, optionsReturn);
+            if (products != null){
+                return HttpResponse.builder()
+                        .code(200)
+                        .message("综合排序成功")
+                        .data(products)
+                        .build();
             }
-        });
-
-
-        products = productService.sortProductByComprehensive(
-                optionsAntiRisk, optionsStability, optionsReturn);
-        return HttpResponse.builder()
-                .code(200)
-                .message("Products successfully sorted by comprehensive criteria")
-                .data(products)
-                .build();
+            else{
+                return HttpResponse.builder()
+                        .code(0)
+                        .message("综合排序失败")
+                        .build();
+            }
+        } catch (Exception e) {
+            return HttpResponse.builder()
+                    .code(0)
+                    .message("数据库访问错误")
+                    .build();
+        }
     }
-
 }

@@ -12,7 +12,7 @@ public class Product {
     private Integer id;
     private String name;
     private String details;
-    private Double price;
+    private Double price;//现价
     private Double antiRisk;
     private Double flexibility;
     private Double returnRate;

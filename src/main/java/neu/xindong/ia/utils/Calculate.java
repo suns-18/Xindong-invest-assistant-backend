@@ -3,6 +3,8 @@ package neu.xindong.ia.utils;
 import neu.xindong.ia.dto.ProductCom;
 import neu.xindong.ia.entity.Product;
 import neu.xindong.ia.entity.QuestionOption;
+import neu.xindong.ia.entity.TradeRecord;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -105,6 +107,19 @@ public class Calculate {
             }
         }
     }*/
+    public  static Double calculateTotalAssets(List<TradeRecord> records){
+
+        return null;
+    }
+    public  static Double calculateTotalCurrentPrice(List<TradeRecord> records){
+
+        return null;
+    }
+    public  static Double calculateDailyProfit(List<TradeRecord> records){
+
+        return null;
+    }
+
 
 
 }

@@ -1,17 +1,13 @@
 package neu.xindong.ia.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import neu.xindong.ia.dao.PossessionDao;
-import neu.xindong.ia.entity.Possession;
-import neu.xindong.ia.entity.Product;
-import neu.xindong.ia.entity.TradeRecord;
-import neu.xindong.ia.service.PossessionService;
+import neu.xindong.ia.dto.PossessionItem;
+import neu.xindong.ia.service.PossessionItemService;
+import neu.xindong.ia.service.ProductService;
+import neu.xindong.ia.service.TradeRecordService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static net.sf.jsqlparser.parser.feature.Feature.insert;
 
 /**
 * @author Arc_xsq
@@ -19,20 +15,20 @@ import static net.sf.jsqlparser.parser.feature.Feature.insert;
 */
 
 @Service
-public class PossessionServiceImpl extends ServiceImpl<PossessionDao, Possession>
-        implements PossessionService {
+public class PossessionItemServiceImpl
+        implements PossessionItemService {
     /**
      *查询所有持仓信息。（根据是否售出查询）数据库此时没有sold属性
      */
-    public List<Possession> findAll(){
+    /*public List<Possession> findAll(){
         return query().eq("sold","0").list();
     }
 
-    /**
+    *//**
      * 增加一条持仓记录
      * @param tradeRecord
      * @return
-     */
+     *//*
     public boolean addPossession(TradeRecord tradeRecord){
 
         //新的持仓记录
@@ -56,11 +52,11 @@ public class PossessionServiceImpl extends ServiceImpl<PossessionDao, Possession
         return save(possession);
     }
 
-    /**
+    *//**
      * 对于卖出交易，更新一条持仓记录。根据交易记录对持仓进行修改，包括数量、持仓成本和是否全部售出。
      * @param tradeRecord
      * @return
-     */
+     *//*
     public boolean updatePossessionWhenSell(TradeRecord tradeRecord){
         List<Possession> possessionList = query().eq("sold","0").list();
         Possession possession = new Possession();
@@ -96,11 +92,11 @@ public class PossessionServiceImpl extends ServiceImpl<PossessionDao, Possession
         return false;
     }
 
-    /**
+    *//**
      * 对于买入交易，更新一条持仓记录。根据交易记录对持仓进行修改，包括数量、持仓成本。
      * @param tradeRecord
      * @return
-     */
+     *//*
     public boolean updatePossessionWhenBuy(TradeRecord tradeRecord){
         List<Possession> possessionList = query().eq("sold","0").list();
         Possession possession = new Possession();
@@ -123,6 +119,12 @@ public class PossessionServiceImpl extends ServiceImpl<PossessionDao, Possession
             }
         }
         return false;
+    }*/
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private TradeRecordService tradeRecordService;
+    public List<PossessionItem> findAll(){
+        return null;
     }
-
 }

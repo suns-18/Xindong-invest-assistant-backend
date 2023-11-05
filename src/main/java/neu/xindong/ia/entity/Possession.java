@@ -5,9 +5,10 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.ToString;
 
-@Data
+/*@Data
 @ToString
-@TableName("possession")
+@TableName("possession")*/
+@Deprecated
 public class Possession {
     @TableId
     private Integer id;

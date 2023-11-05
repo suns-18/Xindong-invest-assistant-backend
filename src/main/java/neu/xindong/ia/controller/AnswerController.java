@@ -30,7 +30,7 @@ public class AnswerController {
                 .build();
     }
 
-    @GetMapping("/antiRiskk")
+    @GetMapping("/antiRisk")
     public HttpResponse getAnswerAntiRiskByQuestion() {
         Answer antiRiskAnswer = answerService.findAntiRiskQuestionFromAnswer();
         try {

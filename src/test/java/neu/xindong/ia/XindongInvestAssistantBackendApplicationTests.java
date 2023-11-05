@@ -3,23 +3,18 @@ package neu.xindong.ia;
 import jakarta.annotation.Resource;
 import neu.xindong.ia.controller.QuestionController;
 import neu.xindong.ia.entity.*;
-import neu.xindong.ia.service.PossessionService;
-import neu.xindong.ia.service.QuestionTitleService;
-import neu.xindong.ia.service.impl.PossessionServiceImpl;
+import neu.xindong.ia.service.impl.PossessionItemServiceImpl;
 import neu.xindong.ia.service.impl.QuestionOptionServiceImpl;
 import neu.xindong.ia.service.impl.QuestionTitleServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.relational.core.sql.In;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
-import java.util.List;
 
 @SpringBootTest
 class XindongInvestAssistantBackendApplicationTests {
@@ -47,7 +42,7 @@ class XindongInvestAssistantBackendApplicationTests {
     }
 
     @Resource
-    private PossessionServiceImpl possessionService;
+    private PossessionItemServiceImpl possessionService;
     @Resource
     private QuestionTitleServiceImpl questionTitleService;
     @Resource

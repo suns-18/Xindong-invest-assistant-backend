@@ -3,7 +3,7 @@ package neu.xindong.ia.controller;
 import neu.xindong.ia.dto.HttpResponse;
 import neu.xindong.ia.entity.Possession;
 import neu.xindong.ia.entity.TradeRecord;
-import neu.xindong.ia.service.PossessionService;
+import neu.xindong.ia.service.PossessionitemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,10 +16,10 @@ import java.util.List;
 @RequestMapping("/api/possession")
 public class PossessionController {
     @Autowired
-    private PossessionService possessionService;
+    private PossessionitemService possessionitemService;
     @GetMapping("/all")
     public HttpResponse getAllPossessions() {
-        List<Possession> possessions = possessionService.findAll();
+        List<Possession> possessions = possessionitemService.findAll();
         return HttpResponse.builder()
                 .code(200)
                 .message("成功获取所有持仓信息")
@@ -29,7 +29,7 @@ public class PossessionController {
     @GetMapping("/add")
     public HttpResponse addPossession(@RequestBody TradeRecord tradeRecord){
         try {
-            boolean result = possessionService.addPossession(tradeRecord);
+            boolean result = possessionitemService.addPossession(tradeRecord);
             if (result){
                 return HttpResponse.builder()
                         .code(200)
@@ -52,7 +52,7 @@ public class PossessionController {
     @GetMapping("/sell")
     public HttpResponse updatePossessionWhenSell(@RequestBody TradeRecord tradeRecord){
         try {
-            boolean result = possessionService.updatePossessionWhenSell(tradeRecord);
+            boolean result = possessionitemService.updatePossessionWhenSell(tradeRecord);
             if (result){
                 return HttpResponse.builder()
                         .code(200)
@@ -75,7 +75,7 @@ public class PossessionController {
     @GetMapping("/buy")
     public HttpResponse updatePossessionWhenBuy(@RequestBody TradeRecord tradeRecord){
         try {
-            boolean result = possessionService.updatePossessionWhenBuy(tradeRecord);
+            boolean result = possessionitemService.updatePossessionWhenBuy(tradeRecord);
             if (result){
                 return HttpResponse.builder()
                         .code(200)

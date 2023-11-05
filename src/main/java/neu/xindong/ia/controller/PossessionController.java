@@ -20,16 +20,10 @@ public class PossessionController {
     @GetMapping("/all")
     public HttpResponse getAllPossessions() {
         List<Possession> possessions = possessionService.findAll();
-        HttpResponse response = null;
-        if (possessions != null && !possessions.isEmpty()) {
-            response.setCode(200);
-            response.setMessage("持仓信息查询成功");
-            response.setData(possessions);
-        } else {
-            response.setCode(0);
-            response.setMessage("持仓信息查询失败");
-        }
-        return response;
+        return HttpResponse.builder()
+                .code(200)
+                .message("成功获取所有持仓信息")
+                .build();
     }
 
     @GetMapping("/add")

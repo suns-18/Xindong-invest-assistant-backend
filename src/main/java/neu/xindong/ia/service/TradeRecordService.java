@@ -10,7 +10,8 @@ import java.util.List;
  * abstract method
  */
 public interface TradeRecordService extends IService<TradeRecord> {
-    List<TradeRecord> findAll();
+    List<TradeRecord> findAll();//也调用总资产的数据
     List<TradeRecord> findTradeRecordByProductId(Product product);
+    List<TradeRecord> findTradeRecordBySold(Integer sold);
 
 }

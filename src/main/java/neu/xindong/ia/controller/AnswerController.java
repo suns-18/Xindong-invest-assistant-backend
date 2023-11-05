@@ -5,6 +5,7 @@ import neu.xindong.ia.dto.Question;
 import neu.xindong.ia.entity.Answer;
 import neu.xindong.ia.entity.QuestionTitle;
 import neu.xindong.ia.service.AnswerService;
+import neu.xindong.ia.service.impl.AnswerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;

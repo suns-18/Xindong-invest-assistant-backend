@@ -10,10 +10,9 @@ import java.util.List;
 public interface AnswerService extends IService<Answer> {
     List<Answer> findAll();
 
-    Answer findAntiRiskQuestionFromAnswer();
-    Answer findStabilityQuestionFromAnswer();
-    Answer findReturnRateQuestionFromAnswer();
+    Answer findAnswerFromAntiRiskQuestion();
+    Answer findAnswerFromStabilityQuestion();
+    Answer findAnswerFromReturnRateQuestion();
 
-    Integer findAnswerAntiRiskByQuestion(QuestionTitle questionTitle);
 
 }

@@ -23,9 +23,9 @@ public class AnswerServiceImpl extends ServiceImpl<AnswerDao, Answer>
     }
     /**Code by ryr
      * get antiRisk answer
-     * @return
+     * @returns
      */
-    public Answer findAntiRiskQuestionFromAnswer(){
+    public Answer findAnswerFromAntiRiskQuestion(){
         return query().eq("question",3).list().get(0);
     }
 
@@ -33,7 +33,7 @@ public class AnswerServiceImpl extends ServiceImpl<AnswerDao, Answer>
      * get stability answer
      * @return
      */
-    public Answer findStabilityQuestionFromAnswer(){
+    public Answer findAnswerFromStabilityQuestion(){
         return query().eq("question",14).list().get(0);
     }
 
@@ -41,12 +41,9 @@ public class AnswerServiceImpl extends ServiceImpl<AnswerDao, Answer>
      * get returnRate answer
      * @return
      */
-    public Answer findReturnRateQuestionFromAnswer(){
+    public Answer findAnswerFromReturnRateQuestion(){
         return query().eq("question",4).list().get(0);
     }
 
-    @Override
-    public Integer findAnswerAntiRiskByQuestion(QuestionTitle questionTitle) {
-        return null;
-    }
+
 }

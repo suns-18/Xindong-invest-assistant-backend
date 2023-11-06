@@ -35,14 +35,6 @@ CREATE TABLE `answer`  (
 -- ----------------------------
 -- Table structure for possession
 -- ----------------------------
-DROP TABLE IF EXISTS `possession`;
-CREATE TABLE `possession`  (
-  `id` int NOT NULL,
-  `product_id` int NULL DEFAULT NULL,
-  `purchase_price` decimal(10, 2) NULL DEFAULT NULL,
-  `amount` int NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of possession

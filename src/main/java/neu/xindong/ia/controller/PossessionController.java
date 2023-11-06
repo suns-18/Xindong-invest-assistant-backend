@@ -21,12 +21,12 @@ public class PossessionController {
     @GetMapping("/all")
     public HttpResponse getAllPossessions() {
         try {
-        List<PossessionItem> possessions = possessionItemService.findAll();
-        return HttpResponse.builder()
-                .code(200)
-                .data(possessions)
-                .message("成功获取所有持仓信息")
-                .build();
+            List<PossessionItem> possessions = possessionItemService.findAll();
+            return HttpResponse.builder()
+                    .code(200)
+                    .data(possessions)
+                    .message("成功获取所有持仓信息")
+                    .build();
         } catch (Exception e) {
             return HttpResponse.builder()
                     .code(0)

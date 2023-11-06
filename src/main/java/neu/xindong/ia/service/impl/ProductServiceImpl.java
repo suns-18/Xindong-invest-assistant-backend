@@ -21,6 +21,15 @@ public class ProductServiceImpl extends ServiceImpl<ProductDao, Product>
     }
 
     /**
+     * get product by id
+     * @param id
+     * @return
+     */
+    public Product findProductById(Integer id) {
+        return getById(id);
+    }
+
+    /**
      * code by ryr
      * sort product By Risk
      *

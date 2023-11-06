@@ -22,6 +22,7 @@ public interface ProductService extends IService<Product> {
                                                 List<QuestionOption> questionOptionStability,
                                                 List<QuestionOption> questionOptionReturn);
     List<Product> findAll();
+    Product findProductById(Integer id);
 
     List<Product> findFavProduct();//展示收藏产品列表
 

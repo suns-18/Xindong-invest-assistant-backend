@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**code by ryr
+/**
+ * code by ryr
  * tradeRecordController
  */
 @RestController
@@ -20,22 +21,18 @@ import java.util.List;
 public class TradeRecordController {
     @Autowired
     private TradeRecordService tradeRecordService;
+
     @GetMapping(value = "/queryList")
-    public HttpResponse getAllTradeRecord() {
-        List<TradeRecord> tradeRecordList=tradeRecordService.findAll();
-        return HttpResponse.builder()
-                .code(200)
-                .message("Get trade record list successfully")
-                .data(tradeRecordList)
-                .build();
+    public HttpResponse<List<TradeRecord>> getAllTradeRecord() {
+        List<TradeRecord> tradeRecordList = tradeRecordService.findAll();
+        return HttpResponse.success(tradeRecordList);
     }
+
     @GetMapping(value = "/queryByProductId")
-    public HttpResponse getTradeRecordByProductId(@RequestBody Product product){
-        List<TradeRecord> tradeRecordList=tradeRecordService.findTradeRecordByProductId(product);
-        return HttpResponse.builder()
-                .code(200)
-                .message("Get trade record list by productId successfully")
-                .data(tradeRecordList)
-                .build();
+    public HttpResponse<List<TradeRecord>> getTradeRecordByProductId(@RequestBody Product product) {
+        List<TradeRecord> tradeRecordList =
+                tradeRecordService
+                        .findTradeRecordByProductId(product);
+        return HttpResponse.success(tradeRecordList);
     }
 }

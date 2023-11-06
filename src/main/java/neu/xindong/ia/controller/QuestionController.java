@@ -42,6 +42,7 @@ public class QuestionController {
             });
 
             return HttpResponse.success(questionList);
+
         } catch (Exception e) {
             e.printStackTrace();
             return HttpResponse.failure(

@@ -25,26 +25,27 @@ public class PossessionController {
     private ProductService productService;
 
     @GetMapping("/possessionStat")
-    public HttpResponse getPossessionStat(){
+    public HttpResponse getPossessionStat() {
         try {
             var records = tradeRecordService.findAll();
             var purchasedProducts = productService.findAll();
             List<PossessionItem> possessions = possessionItemService.findAll();
-            PossessionStat possessionStat=null;
+
+            PossessionStat possessionStat = new PossessionStat();
+
             possessionStat.setList(possessions);
+
             possessionStat.setTotalAssets(Calculate.calculateTotalAssets(records));
-            possessionStat.setTotalCurrentPrice(Calculate.calculateTotalCurrentPrice(purchasedProducts, records));
-            possessionStat.setDailyProfit(Calculate.calculateDailyProfit(purchasedProducts,records));
-            return HttpResponse.builder()
-                    .code(200)
-                    .data(possessionStat)
-                    .message("成功获取模拟持仓信息")
-                    .build();
+
+            possessionStat.setTotalCurrentPrice(
+                    Calculate.calculateTotalCurrentPrice(purchasedProducts, records));
+
+            possessionStat.setDailyProfit(
+                    Calculate.calculateDailyProfit(purchasedProducts, records));
+
+            return HttpResponse.success(possessionStat);
         } catch (Exception e) {
-            return HttpResponse.builder()
-                    .code(0)
-                    .message("数据库访问错误")
-                    .build();
+            return HttpResponse.failure(0, "数据库访问错误");
         }
     }
 

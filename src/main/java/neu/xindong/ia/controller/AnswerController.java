@@ -24,59 +24,34 @@ public class AnswerController {
     @GetMapping("/all")
     public HttpResponse getAllAnswers() {
         List<Answer> answers = answerService.findAll();
-        return HttpResponse.builder()
-                .code(200)
-                .message("成功获取用户填写的风险问卷的答案")
-                .data(answers)
-                .build();
+        return HttpResponse.success(answers);
     }
 
     @GetMapping("/antiRisk")
     public HttpResponse getAnswerFromAntiRiskByQuestion() {
-        Answer antiRiskAnswer = answerService.findAnswerFromAntiRiskQuestion();
         try {
-            if (antiRiskAnswer != null) {
-                return HttpResponse.builder()
-                        .code(200)
-                        .message("成功获取对应问题答案的收益率")
-                        .data(antiRiskAnswer)
-                        .build();
-            } else {
-                return HttpResponse.builder()
-                        .code(0)
-                        .message("收益率获取失败")
-                        .build();
-            }
+            Answer antiRiskAnswer
+                    = answerService
+                    .findAnswerFromAntiRiskQuestion();
+            return HttpResponse.success(antiRiskAnswer);
         } catch (Exception e) {
-            return HttpResponse.builder()
-                    .code(0)
-                    .message("数据库访问错误")
-                    .build();
+            return HttpResponse.failure(0, "数据库访问错误");
         }
 
     }
 
     @GetMapping("/stability")
     public HttpResponse getStabilityFromQuestionFromAnswer() {
-        Answer stabilityAnswer = answerService.findAnswerFromStabilityQuestion();
+
         try {
-            if (stabilityAnswer != null) {
-                return HttpResponse.builder()
-                        .code(200)
-                        .message("成功获取对应问题答案的稳定性")
-                        .data(stabilityAnswer)
-                        .build();
-            } else {
-                return HttpResponse.builder()
-                        .code(0)
-                        .message("稳定性指标获取失败")
-                        .build();
-            }
+            Answer stabilityAnswer =
+                    answerService
+                            .findAnswerFromStabilityQuestion();
+            return HttpResponse.success(stabilityAnswer);
+
         } catch (Exception e) {
-            return HttpResponse.builder()
-                    .code(0)
-                    .message("数据库访问错误")
-                    .build();
+            return HttpResponse.failure(
+                    0, "数据库访问错误");
         }
 
     }
@@ -85,23 +60,10 @@ public class AnswerController {
     public HttpResponse getAnswerFromReturnRateQuestion() {
         Answer returnRateAnswer = answerService.findAnswerFromReturnRateQuestion();
         try {
-            if (returnRateAnswer != null) {
-                return HttpResponse.builder()
-                        .code(200)
-                        .message("成功获取对应问题答案的收益率")
-                        .data(returnRateAnswer)
-                        .build();
-            } else {
-                return HttpResponse.builder()
-                        .code(0)
-                        .message("收益率获取失败")
-                        .build();
-            }
+            return HttpResponse.success(returnRateAnswer);
         } catch (Exception e) {
-            return HttpResponse.builder()
-                    .code(0)
-                    .message("数据库访问错误")
-                    .build();
+            return HttpResponse.failure(
+                    0, "数据库访问错误");
         }
 
     }

@@ -2,15 +2,12 @@ package neu.xindong.ia.controller;
 
 import neu.xindong.ia.dto.HttpResponse;
 import neu.xindong.ia.dto.PossessionItem;
-import neu.xindong.ia.entity.Possession;
-import neu.xindong.ia.entity.TradeRecord;
 import neu.xindong.ia.service.PossessionItemService;
 import neu.xindong.ia.service.ProductService;
 import neu.xindong.ia.service.TradeRecordService;
 import neu.xindong.ia.utils.Calculate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

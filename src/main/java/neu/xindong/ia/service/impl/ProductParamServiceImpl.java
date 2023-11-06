@@ -5,7 +5,6 @@ import neu.xindong.ia.dao.ProductParamDao;
 import neu.xindong.ia.entity.ProductParam;
 import neu.xindong.ia.service.ProductParamService;
 import org.springframework.stereotype.Service;
-
 @Service
 public class ProductParamServiceImpl extends ServiceImpl<ProductParamDao,ProductParam>
         implements ProductParamService {

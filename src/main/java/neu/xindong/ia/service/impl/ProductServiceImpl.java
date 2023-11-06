@@ -74,5 +74,18 @@ public class ProductServiceImpl extends ServiceImpl<ProductDao, Product>
                 valueReturn,
                 productList);
     }
+    public List<Product> findFavProduct(){
+        var FavList=new ArrayList<Product>();
+        var ProductList=this.findAll();
+        for(Product product:ProductList){
+            if(product.getState()==1){
+                FavList.add(product);
+            }
+        }
+        return FavList;
+    }
+    public int changeFavState(){
 
+        return 0;
+    }
 }

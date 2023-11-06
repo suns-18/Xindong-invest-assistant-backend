@@ -1,56 +1,52 @@
 package neu.xindong.ia.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import neu.xindong.ia.dto.HttpResponse;
 import neu.xindong.ia.dto.Question;
-import neu.xindong.ia.entity.QuestionOption;
-import neu.xindong.ia.entity.QuestionTitle;
 import neu.xindong.ia.service.impl.QuestionOptionServiceImpl;
 import neu.xindong.ia.service.impl.QuestionTitleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/question")
+@Tag(name = "问卷接口", description = "定义问卷接口")
 public class QuestionController {
     @Autowired
-    private QuestionOptionServiceImpl questionOptionService;
+    private QuestionOptionServiceImpl optionService;
     @Autowired
-    private QuestionTitleServiceImpl questionTitleService;
-    @GetMapping(value="/queryList")
-    public HttpResponse queryList(){
-        /*展示所有问题及对应选项*/
+    private QuestionTitleServiceImpl titleService;
+
+    @GetMapping(value = "/queryList")
+    @Operation(summary = "获取问卷",
+            description = "返回所有问题描述和选项")
+    public HttpResponse<List<Question>> queryList() {
         try {
-            var questions = questionTitleService.list();
-            var options = questionOptionService.list();
-            var question = new Question();
+            var titles = titleService.findAll();
             var questionList = new ArrayList<Question>();
 
-            question.setOptions(new ArrayList<>());
+            var question = new Question();
+            titles.forEach(title -> {
+                var options = optionService
+                        .findOptionsByQuestion(title.getId());
+                question.setOptions(new ArrayList<>());
 
-            for(QuestionTitle questionTitle:questions){
-                for (QuestionOption questionOption:options){
-                    if(questionTitle.getId().equals(questionOption.getQuestion())){
-                        question.setTitle(questionTitle);
-                        question.getOptions().add(questionOption);
-                        questionList.add(question);
-                    }
-                }
-            }
-            return HttpResponse.builder()
-                    .code(200)
-                    .data(questionList)
-                    .message("查询成功")
-                    .build();
+                question.setTitle(title);
+                question.setOptions(options);
+
+                questionList.add(question);
+            });
+
+            return HttpResponse.success(questionList);
         } catch (Exception e) {
             e.printStackTrace();
-            return HttpResponse.builder()
-                    .code(0)
-                    .message("数据库访问错误")
-                    .build();
+            return HttpResponse.failure(
+                    0, "数据库访问错误");
         }
-
     }
 
 }

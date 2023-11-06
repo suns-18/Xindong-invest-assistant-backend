@@ -74,9 +74,9 @@ public class ProductServiceTest {
     }
     @Test
     public void sortProductByComprehensiveTest(){
-        List<QuestionOption> optionAntiRisk=questionOptionService.findQuestionOptionsByQuestion(3);
-        List<QuestionOption> optionStability=questionOptionService.findQuestionOptionsByQuestion(14);
-        List<QuestionOption> optionReturn=questionOptionService.findQuestionOptionsByQuestion(4);
+        List<QuestionOption> optionAntiRisk=questionOptionService.findOptionsByQuestion(3);
+        List<QuestionOption> optionStability=questionOptionService.findOptionsByQuestion(14);
+        List<QuestionOption> optionReturn=questionOptionService.findOptionsByQuestion(4);
 
         List<ProductCom> productComList=productService.sortProductByComprehensive(optionAntiRisk,optionStability,optionReturn);
         for(ProductCom productCom:productComList){

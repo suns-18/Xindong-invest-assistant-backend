@@ -25,7 +25,7 @@ public class QuestionController {
         try {
             var questions = questionTitleService.list();
             var options = questionOptionService.list();
-            Question question = null;
+            var question = new Question();
             var questionList = new ArrayList<Question>();
             for(QuestionTitle questionTitle:questions){
                 for (QuestionOption questionOption:options){

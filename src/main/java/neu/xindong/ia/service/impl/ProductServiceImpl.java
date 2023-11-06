@@ -84,8 +84,21 @@ public class ProductServiceImpl extends ServiceImpl<ProductDao, Product>
         }
         return FavList;
     }
-    public int changeFavState(){
 
-        return 0;
+    /**
+     * change fav state:return 0(cancel favourite successfully),return 1(favourite successfully)
+     * @param product
+     * @return
+     */
+    public int changeFavState(Product product){
+        if(product.getState()==1){
+            product.setState(0);
+            return 0;
+        }else if(product.getState()==0){
+            product.setState(1);
+            return 1;
+        }else{
+            return 404;
+        }
     }
 }

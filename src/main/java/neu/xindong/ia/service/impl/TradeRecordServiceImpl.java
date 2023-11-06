@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class TradeRecordServiceImpl extends ServiceImpl<TradeRecordDao, TradeRecord> implements TradeRecordService {
-    /**code by ryr
+    /**
      * trade list
      * @return
      */
@@ -17,7 +17,7 @@ public class TradeRecordServiceImpl extends ServiceImpl<TradeRecordDao, TradeRec
         return query().list();
     }
 
-    /**code by ryr
+    /**
      * get tradeRecord by product id
      * @param product
      * @return
@@ -25,8 +25,14 @@ public class TradeRecordServiceImpl extends ServiceImpl<TradeRecordDao, TradeRec
     public List<TradeRecord> findTradeRecordByProductId(Product product){
         return query().like("product_id",product.getId()).list();
     }
+
+    /**
+     * find sold record list and unsold record list
+     * @param sold
+     * @return
+     */
     public List<TradeRecord> findTradeRecordBySold(Integer sold){
-        return null;
+        return query().eq("sold",sold).list();
     }
 
 

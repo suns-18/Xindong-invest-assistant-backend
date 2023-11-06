@@ -1,12 +1,15 @@
 package neu.xindong.ia.service.impl;
 
 import neu.xindong.ia.dto.PossessionItem;
+import neu.xindong.ia.entity.Product;
+import neu.xindong.ia.entity.TradeRecord;
 import neu.xindong.ia.service.PossessionItemService;
 import neu.xindong.ia.service.ProductService;
 import neu.xindong.ia.service.TradeRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -124,7 +127,38 @@ public class PossessionItemServiceImpl
     private ProductService productService;
     @Autowired
     private TradeRecordService tradeRecordService;
+
+    /**
+     * get possession items
+     * @return
+     */
     public List<PossessionItem> findAll(){
-        return null;
+        List<Product> productList=productService.findAll();
+        List<TradeRecord> tradeRecordList=tradeRecordService.findAll();
+
+        List<PossessionItem> possessionItemList=new ArrayList<>();
+
+        productList.forEach(e->{
+            var possessionItem = new PossessionItem();
+            var product=new Product();
+            product.setId(e.getId());
+            product.setName(e.getName());
+            product.setDetails(e.getDetails());
+            product.setPrice(e.getPrice());
+            product.setAntiRisk(e.getAntiRisk());
+            product.setFlexibility(e.getFlexibility());
+            product.setReturnRate(e.getReturnRate());
+            product.setState(e.getState());
+            for(TradeRecord tradeRecord:tradeRecordList){
+                if(tradeRecord.getProductId()==product.getId()){
+                    possessionItem.setPurchaseDate(tradeRecord.getDealTime());
+                    possessionItem.setAmount(tradeRecord.getAmount());
+                    possessionItem.setPurchasePrice(tradeRecord.getPrice()*tradeRecord.getAmount());
+                }
+            }
+            possessionItem.setProduct(product);
+            possessionItemList.add(possessionItem);
+        });
+        return possessionItemList;
     }
 }

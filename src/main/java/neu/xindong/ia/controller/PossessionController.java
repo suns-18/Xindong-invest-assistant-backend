@@ -2,6 +2,7 @@ package neu.xindong.ia.controller;
 
 import neu.xindong.ia.dto.HttpResponse;
 import neu.xindong.ia.dto.PossessionItem;
+import neu.xindong.ia.dto.PossessionStat;
 import neu.xindong.ia.service.PossessionItemService;
 import neu.xindong.ia.service.ProductService;
 import neu.xindong.ia.service.TradeRecordService;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/possessionItem")
+@RequestMapping("/api/possession")
 public class PossessionController {
     @Autowired
     private PossessionItemService possessionItemService;
@@ -22,67 +23,22 @@ public class PossessionController {
     private TradeRecordService tradeRecordService;
     @Autowired
     private ProductService productService;
-    @GetMapping("/all")
-    public HttpResponse getAllPossessionItem() {
+
+    @GetMapping("/possessionStat")
+    public HttpResponse getPossessionStat(){
         try {
+            var records = tradeRecordService.findAll();
+            var purchasedProducts = productService.findAll();
             List<PossessionItem> possessions = possessionItemService.findAll();
+            PossessionStat possessionStat=null;
+            possessionStat.setList(possessions);
+            possessionStat.setTotalAssets(Calculate.calculateTotalAssets(records));
+            possessionStat.setTotalCurrentPrice(Calculate.calculateTotalCurrentPrice(purchasedProducts, records));
+            possessionStat.setDailyProfit(Calculate.calculateDailyProfit(purchasedProducts,records));
             return HttpResponse.builder()
                     .code(200)
-                    .data(possessions)
-                    .message("成功获取所有持仓信息")
-                    .build();
-        } catch (Exception e) {
-            return HttpResponse.builder()
-                    .code(0)
-                    .message("数据库访问错误")
-                    .build();
-        }
-    }
-    @GetMapping("/totalAssets")
-    public HttpResponse getTotalAssets(){
-        try {
-            var records = tradeRecordService.findAll();
-            var totalAssets =Calculate.calculateTotalAssets(records);
-            return HttpResponse.builder()
-               .code(200)
-               .data(totalAssets)
-               .message("成功获取总资产信息")
-               .build();
-        } catch (Exception e) {
-            return HttpResponse.builder()
-                    .code(0)
-                    .message("数据库访问错误")
-                    .build();
-        }
-    }
-    @GetMapping("/totalCurrentPrice")
-    public HttpResponse getTotalCurrentPrice(){
-        try {
-            var records = tradeRecordService.findAll();
-            var purchasedProducts = productService.findAll();
-            var totalCurrentPrice =Calculate.calculateTotalCurrentPrice(purchasedProducts,records);
-            return HttpResponse.builder()
-                    .code(200)
-                    .data(totalCurrentPrice)
-                    .message("成功获取总资产信息")
-                    .build();
-        } catch (Exception e) {
-            return HttpResponse.builder()
-                    .code(0)
-                    .message("数据库访问错误")
-                    .build();
-        }
-    }
-    @GetMapping("/totalDailyProfit")
-    public HttpResponse calculateDailyProfit(){
-        try {
-            var records = tradeRecordService.findAll();
-            var purchasedProducts = productService.findAll();
-            var totalDailyProfit =Calculate.calculateDailyProfit(purchasedProducts,records);
-            return HttpResponse.builder()
-                    .code(200)
-                    .data(totalDailyProfit)
-                    .message("成功获取总资产信息")
+                    .data(possessionStat)
+                    .message("成功获取模拟持仓信息")
                     .build();
         } catch (Exception e) {
             return HttpResponse.builder()
@@ -92,6 +48,38 @@ public class PossessionController {
         }
     }
 
+   /* public List<PossessionItem>  getAllPossessionItem() {
+
+            List<PossessionItem> possessions = possessionItemService.findAll();
+            return possessions;
+
+    }*/
+
+   /* public Double getTotalAssets(){
+
+            var records = tradeRecordService.findAll();
+            var totalAssets =Calculate.calculateTotalAssets(records);
+            return totalAssets;
+
+    }
+
+    public Double getTotalCurrentPrice(){
+
+            var records = tradeRecordService.findAll();
+            var purchasedProducts = productService.findAll();
+            var totalCurrentPrice =Calculate.calculateTotalCurrentPrice(purchasedProducts,records);
+            return totalCurrentPrice;
+
+    }
+
+    public Double calculateDailyProfit() {
+
+        var records = tradeRecordService.findAll();
+        var purchasedProducts = productService.findAll();
+        var totalDailyProfit = Calculate.calculateDailyProfit(purchasedProducts, records);
+        return totalDailyProfit;
+
+    }*/
 //    @GetMapping("/add")
 //    public HttpResponse addPossession(@RequestBody TradeRecord tradeRecord){
 //        try {

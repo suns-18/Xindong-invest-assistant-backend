@@ -111,19 +111,45 @@ public class Calculate {
             }
         }
     }*/
-    public static Double calculateTotalAssets(List<TradeRecord> records) {
 
-        return null;
+    @Autowired
+    private static ProductService productService;//目前不可用，待解决
+    public static Double calculateTotalAssets(List<TradeRecord> records) {
+        double totalAssets = 0.00;
+        for (TradeRecord tradeRecord : records){
+            if(tradeRecord.getSold().intValue()==0){
+                totalAssets += tradeRecord.getPrice().doubleValue()*tradeRecord.getAmount().doubleValue();
+            }else {
+                totalAssets -= tradeRecord.getPrice().doubleValue()*tradeRecord.getAmount().doubleValue();
+            }
+        }
+        return totalAssets;
     }
 
     public static Double calculateTotalCurrentPrice(List<TradeRecord> records) {
-
-        return null;
+        double totalCurrentPrice = 0.00;
+        for (TradeRecord tradeRecord : records){
+            Product product = productService.findProductById(tradeRecord.getProductId());
+            if(tradeRecord.getSold().intValue()==0){
+                totalCurrentPrice += product.getPrice().doubleValue()*tradeRecord.getAmount().doubleValue();
+            }else {
+                totalCurrentPrice -= product.getPrice().doubleValue()*tradeRecord.getAmount().doubleValue();
+            }
+        }
+        return totalCurrentPrice;
     }
 
-    public static Double calculateDailyProfit(List<TradeRecord> records) {
-
-        return null;
+    public  static Double calculateDailyProfit(List<TradeRecord> records){
+        double dailyProfit = 0.00;
+        for (TradeRecord tradeRecord : records){
+            Product product = productService.findProductById(tradeRecord.getProductId());
+            if(tradeRecord.getSold().intValue()==0){
+                dailyProfit += (product.getPrice().doubleValue()-tradeRecord.getPrice().doubleValue())*tradeRecord.getAmount().doubleValue();
+            }else {
+                dailyProfit -= (product.getPrice().doubleValue()-tradeRecord.getPrice().doubleValue())*tradeRecord.getAmount().doubleValue();
+            }
+        }
+        return dailyProfit;
     }
 
 

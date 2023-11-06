@@ -72,8 +72,8 @@ public class Calculate {
         productComList.sort(new Comparator<ProductCom>() {
             @Override
             public int compare(ProductCom p1, ProductCom p2) {
-                return Double.compare(p2.getComprehensive(),
-                        p1.getComprehensive());
+                return Double.compare(p1.getComprehensive(),
+                        p2.getComprehensive());
             }
         });
 
@@ -88,7 +88,7 @@ public class Calculate {
 
     /**code by ryr
      * bubble sort productCom by comprehensive
-     * @param productCom
+     * @param
      */
     /*public void bubbleSort(List<ProductCom> productCom) {
         int len = productCom.size();

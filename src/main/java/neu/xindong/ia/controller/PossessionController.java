@@ -19,7 +19,7 @@ public class PossessionController {
     @Autowired
     private PossessionItemService possessionItemService;
     @GetMapping("/all")
-    public HttpResponse getAllPossessions() {
+    public HttpResponse getAllPossessionItem() {
         try {
         List<PossessionItem> possessions = possessionItemService.findAll();
         return HttpResponse.builder()

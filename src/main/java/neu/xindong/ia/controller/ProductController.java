@@ -31,11 +31,18 @@ public class ProductController {
 
     @GetMapping("/all")
     public HttpResponse getAllProducts(){
+        try {
         List<Product> products = productService.findAll();
         return HttpResponse.builder()
                 .code(200)
                 .data(products)
                 .build();
+        } catch (Exception e) {
+            return HttpResponse.builder()
+                    .code(0)
+                    .message("数据库访问错误")
+                    .build();
+        }
     }
 
     // 获取按风险排序的产品

@@ -59,14 +59,12 @@
 | question | int  | 对应问题id |
 | option   | int  | 选项id   |
 
-## 6. possession
+## 6. product_param
+产品页面跳转网址参数
 
-持仓信息
+| 字段名        | 字段类型        | 字段描述 |
+|------------|-------------|------|
+| id         | int         | id   |
+| product_id | int         | 产品id |
+| param      | varchar(255) | 网址参数 |
 
-| 字段名            | 字段类型        | 字段描述        |
-|----------------|-------------|-------------|
-| id             | int         | 流水号         |
-| product_id     | int         | 模拟持仓内部的产品代码 |
-| purchase_price | decimal(.2) | 买入价格        |
-| amount         | int         | 在仓数量        |
-| sold           | int         | 是否已售出，0假1真  |

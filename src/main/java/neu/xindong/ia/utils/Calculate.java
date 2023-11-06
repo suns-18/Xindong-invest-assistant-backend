@@ -26,26 +26,7 @@ public class Calculate {
                                                           Integer optionReturn,
                                                           List<Product> productList) {
 
-
-        double anti_risk;
-        double flexibility;
-        double return_rate;
-        double comprehensive;
-
         List<ProductCom> productComList = new ArrayList<>();
-
-/*        for(Product product:productList){
-            anti_risk=product.getAnti_risk();
-            flexibility=product.getFlexibility();
-            return_rate=product.getReturn_rate();
-            comprehensive=(Math.abs(anti_risk_-anti_risk))/anti_risk_
-                    +(Math.abs(stability_-flexibility))/stability_
-                    +(Math.abs(return_rate_-return_rate))/return_rate_;
-            ProductCom productComTemp=new ProductCom();
-            productComTemp.setProduct(product);
-            productComTemp.setComprehensive(comprehensive);
-            productCom.add(productComTemp);
-        }*/
 
         productList.forEach(e -> {
             var com = new ProductCom();
@@ -80,76 +61,86 @@ public class Calculate {
         });
 
         return productComList;
-
-        /*List<Product> products=new ArrayList<>();
-        for(ProductCom productComTemp:productCom){
-            products.add(productComTemp.getProduct());
-        }
-        return products;*/
     }
 
-    /**
-     * code by ryr
-     * bubble sort productCom by comprehensive
-     *
-     * @param
-     */
-    /*public void bubbleSort(List<ProductCom> productCom) {
-        int len = productCom.size();
-        for (int i = 0; i < len - 1; i++) {
-            boolean flag = true;
-            for (int j = 0; j < len - i - 1; j++) {
-                if (productCom.get(j).getComprehensive() > productCom.get(j+1).getComprehensive()) {
-                    double tmp = productCom.get(j).getComprehensive();
-                    productCom.get(j).setComprehensive(productCom.get(j+1).getComprehensive());
-                    productCom.get(j+1).setComprehensive(tmp);
-                    flag = false;
-                }
-            }
-            if (flag) {
-                break;
-            }
-        }
-    }*/
 
-    @Autowired
-    private static ProductService productService;//目前不可用，待解决
-    public static Double calculateTotalAssets(List<TradeRecord> records) {
-        double totalAssets = 0.00;
-        for (TradeRecord tradeRecord : records){
-            if(tradeRecord.getSold().intValue()==0){
-                totalAssets += tradeRecord.getPrice().doubleValue()*tradeRecord.getAmount().doubleValue();
-            }else {
-                totalAssets -= tradeRecord.getPrice().doubleValue()*tradeRecord.getAmount().doubleValue();
+    /*@Autowired
+    private static ProductService productService;//目前不可用，待解决*/
+
+    public static Double calculateTotalAssets(
+            List<TradeRecord> records) {
+
+        /*double totalAssets = 0.00;
+        for (TradeRecord tradeRecord : records) {
+            if (tradeRecord.getSold().intValue() == 0) {
+                totalAssets += tradeRecord.getPrice().doubleValue()
+                        * tradeRecord.getAmount().doubleValue();
+            } else {
+                totalAssets -= tradeRecord.getPrice().doubleValue()
+                        * tradeRecord.getAmount().doubleValue();
             }
-        }
-        return totalAssets;
+        }*/
+
+        return records.stream()
+                .mapToDouble(record -> {
+                    double price = record.getPrice().doubleValue();
+                    double amount = record.getAmount().doubleValue();
+                    return (record.getSold().intValue() == 0) ?
+                            price * amount : -price * amount;
+                })
+                .sum();
     }
 
-    public static Double calculateTotalCurrentPrice(List<TradeRecord> records) {
-        double totalCurrentPrice = 0.00;
-        for (TradeRecord tradeRecord : records){
+    public static Double calculateTotalCurrentPrice(
+            List<Product> purchasedProducts,
+            List<TradeRecord> records) {
+
+        /*double totalCurrentPrice = 0.00;
+        for (TradeRecord tradeRecord : records) {
             Product product = productService.findProductById(tradeRecord.getProductId());
-            if(tradeRecord.getSold().intValue()==0){
-                totalCurrentPrice += product.getPrice().doubleValue()*tradeRecord.getAmount().doubleValue();
-            }else {
-                totalCurrentPrice -= product.getPrice().doubleValue()*tradeRecord.getAmount().doubleValue();
+            if (tradeRecord.getSold().intValue() == 0) {
+                totalCurrentPrice += product.getPrice().doubleValue() * tradeRecord.getAmount().doubleValue();
+            } else {
+                totalCurrentPrice -= product.getPrice().doubleValue() * tradeRecord.getAmount().doubleValue();
             }
         }
-        return totalCurrentPrice;
+
+        return totalCurrentPrice;*/
+
+        return records.stream().mapToDouble(record -> {
+            var optionalProduct = purchasedProducts.stream()
+                    .filter(e -> e.getId().equals(record.getProductId()))
+                    .findFirst();
+
+            return optionalProduct.map(product -> product.getPrice()
+                            * record.getAmount())
+                    .orElse(0.0);
+        }).sum();
     }
 
-    public  static Double calculateDailyProfit(List<TradeRecord> records){
-        double dailyProfit = 0.00;
-        for (TradeRecord tradeRecord : records){
+    public static Double calculateDailyProfit(
+            List<Product> purchasedProducts,
+            List<TradeRecord> records) {
+        /*double dailyProfit = 0.00;
+        for (TradeRecord tradeRecord : records) {
             Product product = productService.findProductById(tradeRecord.getProductId());
-            if(tradeRecord.getSold().intValue()==0){
-                dailyProfit += (product.getPrice().doubleValue()-tradeRecord.getPrice().doubleValue())*tradeRecord.getAmount().doubleValue();
-            }else {
-                dailyProfit -= (product.getPrice().doubleValue()-tradeRecord.getPrice().doubleValue())*tradeRecord.getAmount().doubleValue();
+            if (tradeRecord.getSold().intValue() == 0) {
+                dailyProfit += (product.getPrice().doubleValue() - tradeRecord.getPrice().doubleValue()) * tradeRecord.getAmount().doubleValue();
+            } else {
+                dailyProfit -= (product.getPrice().doubleValue() - tradeRecord.getPrice().doubleValue()) * tradeRecord.getAmount().doubleValue();
             }
         }
-        return dailyProfit;
+        return dailyProfit;*/
+
+        return records.stream().mapToDouble(record -> {
+            var optionalProduct = purchasedProducts.stream()
+                    .filter(e -> e.getId().equals(record.getProductId()))
+                    .findFirst();
+
+            return optionalProduct.map(product -> product.getPrice()
+                            - record.getAmount())
+                    .orElse(0.0);
+        }).sum();
     }
 
 

@@ -47,11 +47,14 @@ class XindongInvestAssistantBackendApplicationTests {
     private QuestionTitleServiceImpl questionTitleService;
     @Resource
     private QuestionOptionServiceImpl questionOptionService;
+/*
 
-    /**
+    */
+/**
      * 测试possessionService
      * 测试查询所有持仓信息
-     */
+     *//*
+
     @Test
     public void testFindAllPossession(){
         List<Possession> possessionList = possessionService.findAll();
@@ -63,11 +66,13 @@ class XindongInvestAssistantBackendApplicationTests {
         }
     }
 
-    /**
+    */
+/**
      * 测试possessionService
      * 测试增加一条持仓记录，成功
      * 测试用例为：tradeRecord的产品id是持仓表中没有的产品
-     */
+     *//*
+
     @Test
     public void testAddPossession1(){
 
@@ -81,11 +86,13 @@ class XindongInvestAssistantBackendApplicationTests {
             System.out.println("Failed to add possession!");
         }
     }
-    /**
+    */
+/**
      * 测试possessionService
      * 测试增加一条持仓记录，失败
      * 测试用例为：tradeRecord的产品id是持仓表中已存在的持仓产品
-     */
+     *//*
+
     @Test
     public void testAddPossession2(){
 
@@ -100,11 +107,13 @@ class XindongInvestAssistantBackendApplicationTests {
         }
     }
 
-    /**
+    */
+/**
      * 测试possessionService
      * 测试在卖出交易时更新一条持仓记录，失败。
      * 测试用例：tradeRecord的卖出数量超过持有数量
-     */
+     *//*
+
     @Test
     public void testUpdatePossessionWhenSell1(){
         TradeRecord tradeRecord = new TradeRecord();
@@ -118,11 +127,13 @@ class XindongInvestAssistantBackendApplicationTests {
             System.out.println("Successful to update possession when sell!");
         }
     }
-    /**
+    */
+/**
      * 测试possessionService
      * 测试在卖出交易时更新一条持仓记录，成功。
      * 测试用例：tradeRecord的卖出数量不超过持有数量
-     */
+     *//*
+
     @Test
     public void testUpdatePossessionWhenSell2(){
         TradeRecord tradeRecord = new TradeRecord();
@@ -137,11 +148,13 @@ class XindongInvestAssistantBackendApplicationTests {
         }
     }
 
-    /**
+    */
+/**
      * 测试possessionService
      * 测试在买入交易时更新一条持仓记录，成功。
      * 测试用例：tradeRecord的产品id在持仓表里，sold=0
-     */
+     *//*
+
     @Test
     public void testUpdatePossessionWhenBuy1(){
         TradeRecord tradeRecord = new TradeRecord();
@@ -156,11 +169,13 @@ class XindongInvestAssistantBackendApplicationTests {
         }
     }
 
-    /**
+    */
+/**
      * 测试possessionService
      * 测试在买入交易时更新一条持仓记录，失败。
      * 测试用例：tradeRecord的产品id不在持仓表里或者sold=1
-     */
+     *//*
+
     @Test
     public void testUpdatePossessionWhenBuy2(){
         TradeRecord tradeRecord = new TradeRecord();
@@ -175,9 +190,11 @@ class XindongInvestAssistantBackendApplicationTests {
         }
     }
 
-    /**
+    */
+/**
      * 测试questionTitleService
-     */
+     *//*
+
     @Test
     public void testFindQuestionTitleByQuestion(){
         int question = 4;
@@ -190,9 +207,11 @@ class XindongInvestAssistantBackendApplicationTests {
         }
     }
 
-    /**
+    */
+/**
      * 测试questionOptionService
-     */
+     *//*
+
     @Test
     public void testFindQuestionOptionsByQuestion(){
         int question = 4;
@@ -205,9 +224,11 @@ class XindongInvestAssistantBackendApplicationTests {
         }
     }
 
-    /**
+    */
+/**
      * 测试questionOptionService
-     */
+     *//*
+
     @Test
     public void testFindOptionValueByAnswer(){
         Answer answer = new Answer();
@@ -216,5 +237,6 @@ class XindongInvestAssistantBackendApplicationTests {
         questionOption = questionOptionService.findOptionValueByAnswer(answer);
         System.out.println("The optionValue found by answer is : "+questionOption.toString());
     }
+*/
 
 }

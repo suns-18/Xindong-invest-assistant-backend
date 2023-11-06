@@ -99,7 +99,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductDao, Product>
     }
 
     /**
-     * change fav state:return 0(cancel favourite successfully),return 1(favourite successfully)
+     * change fav state
      * @param product
      * @return
      */

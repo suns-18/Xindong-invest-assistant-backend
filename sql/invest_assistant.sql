@@ -206,7 +206,7 @@ DROP TABLE IF EXISTS `trade_record`;
 CREATE TABLE `trade_record`  (
   `id` int NOT NULL,
   `product_id` int NULL DEFAULT NULL,
-  `purchase_price` decimal(10, 2) NULL DEFAULT NULL,
+  `price` decimal(10, 2) NULL DEFAULT NULL,
   `amount` int NULL DEFAULT NULL,
   `deal_time` datetime NULL DEFAULT NULL,
   `sold` int NULL DEFAULT NULL,

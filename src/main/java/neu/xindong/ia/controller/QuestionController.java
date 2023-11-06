@@ -21,12 +21,14 @@ public class QuestionController {
     @GetMapping(value="/queryList")
     public HttpResponse queryList(){
         /*展示所有问题及对应选项*/
-        HttpResponse resp = null;
         try {
             var questions = questionTitleService.list();
             var options = questionOptionService.list();
             var question = new Question();
             var questionList = new ArrayList<Question>();
+
+            question.setOptions(new ArrayList<>());
+
             for(QuestionTitle questionTitle:questions){
                 for (QuestionOption questionOption:options){
                     if(questionTitle.getId().equals(questionOption.getQuestion())){
@@ -36,17 +38,19 @@ public class QuestionController {
                     }
                 }
             }
-            resp.setCode(1);
-            resp.setData(questionList);
-            resp.setMessage("查询成功");
+            return HttpResponse.builder()
+                    .code(200)
+                    .data(questionList)
+                    .message("查询成功")
+                    .build();
         } catch (Exception e) {
             e.printStackTrace();
-            resp = HttpResponse.builder()
+            return HttpResponse.builder()
                     .code(0)
                     .message("数据库访问错误")
                     .build();
         }
-        return resp;
+
     }
 
 }

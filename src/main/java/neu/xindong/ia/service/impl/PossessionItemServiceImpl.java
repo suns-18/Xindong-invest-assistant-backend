@@ -11,11 +11,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
-* @author Arc_xsq
-* @date 2023/11/2 20:01
-*/
+ * @author Arc_xsq
+ * @date 2023/11/2 20:01
+ */
 
 @Service
 public class PossessionItemServiceImpl
@@ -95,8 +96,10 @@ public class PossessionItemServiceImpl
         return false;
     }
 
-    *//**
+    */
+    /**
      * 对于买入交易，更新一条持仓记录。根据交易记录对持仓进行修改，包括数量、持仓成本。
+     *
      * @param tradeRecord
      * @return
      *//*
@@ -130,6 +133,7 @@ public class PossessionItemServiceImpl
 
     /**
      * get possession items
+     *
      * @return
      */
     /*public List<PossessionItem> findAll(){
@@ -161,30 +165,40 @@ public class PossessionItemServiceImpl
         });
         return possessionItemList;
     }*/
-    public List<PossessionItem> findAll(){
-        List<Product> productList=productService.findAll();
-        List<TradeRecord> tradeRecordList=tradeRecordService.findAll();
+    public List<PossessionItem> findAll() {
+        List<Product> productList = productService.findAll();
+        List<TradeRecord> tradeRecordList = tradeRecordService.findAll();
 
-        List<PossessionItem> possessionItemList=new ArrayList<>();
+        List<PossessionItem> possessionItemList = new ArrayList<>();
 
-        tradeRecordList.forEach(e->{
+        tradeRecordList.forEach(record -> {
             var possessionItem = new PossessionItem();
-            var tradeRecord=new TradeRecord();
-            tradeRecord.setId(e.getId());
-            tradeRecord.setProductId(e.getProductId());
-            tradeRecord.setPrice(e.getPrice());
-            tradeRecord.setSold(e.getSold());
-            tradeRecord.setAmount(e.getAmount());
-            tradeRecord.setDealTime(e.getDealTime());
+            var tradeRecord = new TradeRecord();
 
-            for(Product product:productList){
+            tradeRecord.setId(record.getId());
+            tradeRecord.setProductId(record.getProductId());
+            tradeRecord.setPrice(record.getPrice());
+            tradeRecord.setSold(record.getSold());
+            tradeRecord.setAmount(record.getAmount());
+            tradeRecord.setDealTime(record.getDealTime());
+
+            /*for(Product product:productList){
                 if(tradeRecord.getProductId()==product.getId()){
                     possessionItem.setPurchaseDate(tradeRecord.getDealTime());
                     possessionItem.setAmount(tradeRecord.getAmount());
                     possessionItem.setPurchasePrice(tradeRecord.getPrice()*tradeRecord.getAmount());
                     possessionItem.setProduct(product);
                 }
-            }
+            }*/
+            productList.forEach(product -> {
+                if (Objects.equals(tradeRecord.getProductId(), product.getId())) {
+                    possessionItem.setPurchaseDate(tradeRecord.getDealTime());
+                    possessionItem.setAmount(tradeRecord.getAmount());
+                    possessionItem.setPurchasePrice(tradeRecord.getPrice() * tradeRecord.getAmount());
+                    possessionItem.setProduct(product);
+                }
+            });
+
             possessionItemList.add(possessionItem);
         });
         return possessionItemList;

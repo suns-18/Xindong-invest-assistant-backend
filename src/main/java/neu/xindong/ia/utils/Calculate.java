@@ -11,8 +11,10 @@ import java.util.List;
 
 
 public class Calculate {
-    /**code by ryr
+    /**
+     * code by ryr
      * calculate comprehensive
+     *
      * @param optionAntiRisk
      * @param optionStability
      * @param optionReturn
@@ -22,7 +24,7 @@ public class Calculate {
     public static List<ProductCom> calculateComprehensive(Integer optionAntiRisk,
                                                           Integer optionStability,
                                                           Integer optionReturn,
-                                         List<Product> productList){
+                                                          List<Product> productList) {
 
 
         double anti_risk;
@@ -45,10 +47,10 @@ public class Calculate {
             productCom.add(productComTemp);
         }*/
 
-        productList.forEach(e->{
+        productList.forEach(e -> {
             var com = new ProductCom();
 //            var product = com.getProduct();
-            var product=new Product();
+            var product = new Product();
             product.setId(e.getId());
             product.setName(e.getName());
             product.setDetails(e.getDetails());
@@ -59,9 +61,9 @@ public class Calculate {
             product.setReturnRate(e.getReturnRate());
             product.setState(e.getState());
 
-            com.setComprehensive((Math.abs(optionAntiRisk-e.getAntiRisk()))/optionAntiRisk
-                    +(Math.abs(optionStability-e.getFlexibility()))/optionStability
-                    +(Math.abs(optionReturn-e.getReturnRate()))/optionReturn);
+            com.setComprehensive((Math.abs(optionAntiRisk - e.getAntiRisk())) / optionAntiRisk
+                    + (Math.abs(optionStability - e.getFlexibility())) / optionStability
+                    + (Math.abs(optionReturn - e.getReturnRate())) / optionReturn);
 
             com.setProduct(product);
 
@@ -86,8 +88,10 @@ public class Calculate {
         return products;*/
     }
 
-    /**code by ryr
+    /**
+     * code by ryr
      * bubble sort productCom by comprehensive
+     *
      * @param
      */
     /*public void bubbleSort(List<ProductCom> productCom) {
@@ -107,19 +111,46 @@ public class Calculate {
             }
         }
     }*/
-    public  static Double calculateTotalAssets(List<TradeRecord> records){
 
-        return null;
+    @Autowired
+    private static ProductService productService;//目前不可用，待解决
+    public static Double calculateTotalAssets(List<TradeRecord> records) {
+        double totalAssets = 0.00;
+        for (TradeRecord tradeRecord : records){
+            if(tradeRecord.getSold().intValue()==0){
+                totalAssets += tradeRecord.getPrice().doubleValue()*tradeRecord.getAmount().doubleValue();
+            }else {
+                totalAssets -= tradeRecord.getPrice().doubleValue()*tradeRecord.getAmount().doubleValue();
+            }
+        }
+        return totalAssets;
     }
-    public  static Double calculateTotalCurrentPrice(List<TradeRecord> records){
 
-        return null;
+    public static Double calculateTotalCurrentPrice(List<TradeRecord> records) {
+        double totalCurrentPrice = 0.00;
+        for (TradeRecord tradeRecord : records){
+            Product product = productService.findProductById(tradeRecord.getProductId());
+            if(tradeRecord.getSold().intValue()==0){
+                totalCurrentPrice += product.getPrice().doubleValue()*tradeRecord.getAmount().doubleValue();
+            }else {
+                totalCurrentPrice -= product.getPrice().doubleValue()*tradeRecord.getAmount().doubleValue();
+            }
+        }
+        return totalCurrentPrice;
     }
+
     public  static Double calculateDailyProfit(List<TradeRecord> records){
-
-        return null;
+        double dailyProfit = 0.00;
+        for (TradeRecord tradeRecord : records){
+            Product product = productService.findProductById(tradeRecord.getProductId());
+            if(tradeRecord.getSold().intValue()==0){
+                dailyProfit += (product.getPrice().doubleValue()-tradeRecord.getPrice().doubleValue())*tradeRecord.getAmount().doubleValue();
+            }else {
+                dailyProfit -= (product.getPrice().doubleValue()-tradeRecord.getPrice().doubleValue())*tradeRecord.getAmount().doubleValue();
+            }
+        }
+        return dailyProfit;
     }
-
 
 
 }

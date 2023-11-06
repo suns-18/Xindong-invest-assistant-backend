@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import neu.xindong.ia.dao.ProductDao;
 import neu.xindong.ia.dto.ProductCom;
-import neu.xindong.ia.entity.Answer;
 import neu.xindong.ia.entity.Product;
 import neu.xindong.ia.entity.QuestionOption;
 import neu.xindong.ia.service.ProductService;
@@ -23,6 +22,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductDao, Product>
 
     /**
      * get product by id
+     *
      * @param id
      * @return
      */
@@ -84,27 +84,30 @@ public class ProductServiceImpl extends ServiceImpl<ProductDao, Product>
                 valueReturn,
                 productList);
     }
-    public List<Product> findFavProduct(){
-        var FavList=new ArrayList<Product>();
+
+    public List<Product> findFavProduct() {
+        /*var FavList=new ArrayList<Product>();
         var ProductList=this.findAll();
         for(Product product:ProductList){
             if(product.getState()==1){
                 FavList.add(product);
             }
         }
-        return FavList;
+        return FavList;*/
+
+        return query().eq("state", 1).list();
     }
 
     /**
-     * change fav state
+     * change fav state:return 0(cancel favourite successfully),return 1(favourite successfully)
      * @param product
      * @return
      */
-    public boolean changeFavState(Product product){
-        if(product.getState()==1){
+    public boolean changeFavState(Product product) {
+        if (product.getState() == 1) {
             product.setState(0);
             return updateById(product);
-        }else if(product.getState()==0){
+        } else if (product.getState() == 0) {
             product.setState(1);
             return updateById(product);
         }

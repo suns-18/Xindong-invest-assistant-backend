@@ -32,8 +32,8 @@ public class AnswerController {
     }
 
     @GetMapping("/antiRisk")
-    public HttpResponse getAnswerAntiRiskByQuestion() {
-        Answer antiRiskAnswer = answerService.findAntiRiskQuestionFromAnswer();
+    public HttpResponse getAnswerFromAntiRiskByQuestion() {
+        Answer antiRiskAnswer = answerService.findAnswerFromAntiRiskQuestion();
         try {
             if (antiRiskAnswer != null) {
                 return HttpResponse.builder()
@@ -57,8 +57,8 @@ public class AnswerController {
     }
 
     @GetMapping("/stability")
-    public HttpResponse getStabilityQuestionFromAnswer() {
-        Answer stabilityAnswer = answerService.findStabilityQuestionFromAnswer();
+    public HttpResponse getStabilityFromQuestionFromAnswer() {
+        Answer stabilityAnswer = answerService.findAnswerFromStabilityQuestion();
         try {
             if (stabilityAnswer != null) {
                 return HttpResponse.builder()
@@ -82,8 +82,8 @@ public class AnswerController {
     }
 
     @GetMapping("/returnRate")
-    public HttpResponse getReturnRateQuestionFromAnswer() {
-        Answer returnRateAnswer = answerService.findReturnRateQuestionFromAnswer();
+    public HttpResponse getAnswerFromReturnRateQuestion() {
+        Answer returnRateAnswer = answerService.findAnswerFromReturnRateQuestion();
         try {
             if (returnRateAnswer != null) {
                 return HttpResponse.builder()
@@ -106,28 +106,28 @@ public class AnswerController {
 
     }
 
-    // 根据问题ID获取答案的风险偏好值
-    @GetMapping("/antiRisk/question")
-    public HttpResponse getAnswerAntiRiskByQuestion(@RequestBody QuestionTitle question) {
-        Integer antiRiskValue = answerService.findAnswerAntiRiskByQuestion(question);
-        try {
-            if (antiRiskValue != null) {
-                return HttpResponse.builder()
-                        .code(200)
-                        .message("成功获取对应问题答案的风险偏好值")
-                        .data(antiRiskValue)
-                        .build();
-            } else {
-                return HttpResponse.builder()
-                        .code(0)
-                        .message("风险偏好值获取失败")
-                        .build();
-            }
-        } catch (Exception e) {
-            return HttpResponse.builder()
-                    .code(0)
-                    .message("数据库访问错误")
-                    .build();
-        }
-    }
+//    // 根据问题ID获取答案的风险偏好值
+//    @GetMapping("/antiRisk/question")
+//    public HttpResponse getAnswerAntiRiskByQuestion(@RequestBody QuestionTitle question) {
+//        Integer antiRiskValue = answerService.findAnswerAntiRiskByQuestion(question);
+//        try {
+//            if (antiRiskValue != null) {
+//                return HttpResponse.builder()
+//                        .code(200)
+//                        .message("成功获取对应问题答案的风险偏好值")
+//                        .data(antiRiskValue)
+//                        .build();
+//            } else {
+//                return HttpResponse.builder()
+//                        .code(0)
+//                        .message("风险偏好值获取失败")
+//                        .build();
+//            }
+//        } catch (Exception e) {
+//            return HttpResponse.builder()
+//                    .code(0)
+//                    .message("数据库访问错误")
+//                    .build();
+//        }
+//    }
 }

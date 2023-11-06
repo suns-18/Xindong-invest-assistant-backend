@@ -11,8 +11,10 @@ import java.util.List;
 
 
 public class Calculate {
-    /**code by ryr
+    /**
+     * code by ryr
      * calculate comprehensive
+     *
      * @param optionAntiRisk
      * @param optionStability
      * @param optionReturn
@@ -22,7 +24,7 @@ public class Calculate {
     public static List<ProductCom> calculateComprehensive(Integer optionAntiRisk,
                                                           Integer optionStability,
                                                           Integer optionReturn,
-                                         List<Product> productList){
+                                                          List<Product> productList) {
 
 
         double anti_risk;
@@ -45,10 +47,10 @@ public class Calculate {
             productCom.add(productComTemp);
         }*/
 
-        productList.forEach(e->{
+        productList.forEach(e -> {
             var com = new ProductCom();
 //            var product = com.getProduct();
-            var product=new Product();
+            var product = new Product();
             product.setId(e.getId());
             product.setName(e.getName());
             product.setDetails(e.getDetails());
@@ -59,9 +61,9 @@ public class Calculate {
             product.setReturnRate(e.getReturnRate());
             product.setState(e.getState());
 
-            com.setComprehensive((Math.abs(optionAntiRisk-e.getAntiRisk()))/optionAntiRisk
-                    +(Math.abs(optionStability-e.getFlexibility()))/optionStability
-                    +(Math.abs(optionReturn-e.getReturnRate()))/optionReturn);
+            com.setComprehensive((Math.abs(optionAntiRisk - e.getAntiRisk())) / optionAntiRisk
+                    + (Math.abs(optionStability - e.getFlexibility())) / optionStability
+                    + (Math.abs(optionReturn - e.getReturnRate())) / optionReturn);
 
             com.setProduct(product);
 
@@ -86,8 +88,10 @@ public class Calculate {
         return products;*/
     }
 
-    /**code by ryr
+    /**
+     * code by ryr
      * bubble sort productCom by comprehensive
+     *
      * @param
      */
     /*public void bubbleSort(List<ProductCom> productCom) {
@@ -107,19 +111,20 @@ public class Calculate {
             }
         }
     }*/
-    public  static Double calculateTotalAssets(List<TradeRecord> records){
-
-        return null;
-    }
-    public  static Double calculateTotalCurrentPrice(List<TradeRecord> records){
-
-        return null;
-    }
-    public  static Double calculateDailyProfit(List<TradeRecord> records){
+    public static Double calculateTotalAssets(List<TradeRecord> records) {
 
         return null;
     }
 
+    public static Double calculateTotalCurrentPrice(List<TradeRecord> records) {
+
+        return null;
+    }
+
+    public static Double calculateDailyProfit(List<TradeRecord> records) {
+
+        return null;
+    }
 
 
 }

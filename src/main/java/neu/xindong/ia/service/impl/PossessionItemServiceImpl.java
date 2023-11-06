@@ -132,7 +132,7 @@ public class PossessionItemServiceImpl
      * get possession items
      * @return
      */
-    public List<PossessionItem> findAll(){
+    /*public List<PossessionItem> findAll(){
         List<Product> productList=productService.findAll();
         List<TradeRecord> tradeRecordList=tradeRecordService.findAll();
 
@@ -157,6 +157,34 @@ public class PossessionItemServiceImpl
                 }
             }
             possessionItem.setProduct(product);
+            possessionItemList.add(possessionItem);
+        });
+        return possessionItemList;
+    }*/
+    public List<PossessionItem> findAll(){
+        List<Product> productList=productService.findAll();
+        List<TradeRecord> tradeRecordList=tradeRecordService.findAll();
+
+        List<PossessionItem> possessionItemList=new ArrayList<>();
+
+        tradeRecordList.forEach(e->{
+            var possessionItem = new PossessionItem();
+            var tradeRecord=new TradeRecord();
+            tradeRecord.setId(e.getId());
+            tradeRecord.setProductId(e.getProductId());
+            tradeRecord.setPrice(e.getPrice());
+            tradeRecord.setSold(e.getSold());
+            tradeRecord.setAmount(e.getAmount());
+            tradeRecord.setDealTime(e.getDealTime());
+
+            for(Product product:productList){
+                if(tradeRecord.getProductId()==product.getId()){
+                    possessionItem.setPurchaseDate(tradeRecord.getDealTime());
+                    possessionItem.setAmount(tradeRecord.getAmount());
+                    possessionItem.setPurchasePrice(tradeRecord.getPrice()*tradeRecord.getAmount());
+                    possessionItem.setProduct(product);
+                }
+            }
             possessionItemList.add(possessionItem);
         });
         return possessionItemList;

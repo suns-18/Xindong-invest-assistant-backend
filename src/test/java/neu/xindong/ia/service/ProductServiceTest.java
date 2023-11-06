@@ -83,6 +83,19 @@ public class ProductServiceTest {
             System.out.printf("comprehensive: "+productCom.getComprehensive());
         }
     }
+    @Test
+    public void findFavProductTest(){
+        List<Product> productList=productService.findFavProduct();
+        for(Product product:productList){
+            System.out.println(product.toString());
+        }
+    }
+    @Test
+    public void changeFavStateTest(){
+        Product product=new Product();
+        product.setState(0);
+        System.out.println("return value: "+productService.changeFavState(product));
+    }
 
 
 }

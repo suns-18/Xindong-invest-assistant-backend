@@ -28,22 +28,22 @@ public class AnswerServiceTest {
         }
     }
     @Test
-    public void findAntiRiskQuestionFromAnswerTest(){
-        System.out.printf(answerService.findAntiRiskQuestionFromAnswer().getId()+" "
-                +answerService.findAntiRiskQuestionFromAnswer().getQuestion()+" "
-                +answerService.findAntiRiskQuestionFromAnswer().getOption());
+    public void findAnswerFromAntiRiskQuestionTest(){
+        System.out.printf(answerService.findAnswerFromAntiRiskQuestion().getId()+" "
+                +answerService.findAnswerFromAntiRiskQuestion().getQuestion()+" "
+                +answerService.findAnswerFromAntiRiskQuestion().getOption());
     }
     @Test
-    public void findStabilityQuestionFromAnswerTest(){
-        System.out.printf(answerService.findAntiRiskQuestionFromAnswer().getId()+" "
-                +answerService.findAntiRiskQuestionFromAnswer().getQuestion()+" "
-                +answerService.findAntiRiskQuestionFromAnswer().getOption());
+    public void findAnswerFromStabilityQuestionTest(){
+        System.out.printf(answerService.findAnswerFromStabilityQuestion().getId()+" "
+                +answerService.findAnswerFromStabilityQuestion().getQuestion()+" "
+                +answerService.findAnswerFromStabilityQuestion().getOption());
     }
     @Test
-    public void findReturnRateQuestionFromAnswerTest(){
-        System.out.printf(answerService.findAntiRiskQuestionFromAnswer().getId()+" "
-                +answerService.findAntiRiskQuestionFromAnswer().getQuestion()+" "
-                +answerService.findAntiRiskQuestionFromAnswer().getOption());
+    public void findAnswerFromReturnRateQuestionTest(){
+        System.out.printf(answerService.findAnswerFromReturnRateQuestion().getId()+" "
+                +answerService.findAnswerFromReturnRateQuestion().getQuestion()+" "
+                +answerService.findAnswerFromReturnRateQuestion().getOption());
     }
 
 

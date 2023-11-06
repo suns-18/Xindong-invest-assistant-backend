@@ -34,6 +34,17 @@ public class TradeRecordServiceTest {
                     +tradeRecord.getSold());
         }
     }
+    @Test
+    public void findTradeRecordBySoldTest(){
+        List<TradeRecord> tradeRecordList1=tradeRecordService.findTradeRecordBySold(0);
+        for(TradeRecord tradeRecord:tradeRecordList1){
+            System.out.println("unsold:"+tradeRecord.toString());
+        }
+        List<TradeRecord> tradeRecordList2=tradeRecordService.findTradeRecordBySold(1);
+        for(TradeRecord tradeRecord:tradeRecordList2){
+            System.out.println("sold:"+tradeRecord.toString());
+        }
+    }
 
 
 }

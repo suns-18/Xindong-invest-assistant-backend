@@ -1,5 +1,6 @@
 package neu.xindong.ia.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import neu.xindong.ia.dao.ProductDao;
 import neu.xindong.ia.dto.ProductCom;
@@ -95,19 +96,18 @@ public class ProductServiceImpl extends ServiceImpl<ProductDao, Product>
     }
 
     /**
-     * change fav state:return 0(cancel favourite successfully),return 1(favourite successfully)
+     * change fav state
      * @param product
      * @return
      */
-    public int changeFavState(Product product){
+    public boolean changeFavState(Product product){
         if(product.getState()==1){
             product.setState(0);
-            return 0;
+            return updateById(product);
         }else if(product.getState()==0){
             product.setState(1);
-            return 1;
-        }else{
-            return 404;
+            return updateById(product);
         }
+        return false;
     }
 }

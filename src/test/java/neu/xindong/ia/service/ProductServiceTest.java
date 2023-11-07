@@ -1,6 +1,6 @@
 package neu.xindong.ia.service;
 
-import neu.xindong.ia.dto.ProductCom;
+import neu.xindong.ia.dto.response.ProductCom;
 import neu.xindong.ia.entity.Product;
 import neu.xindong.ia.entity.QuestionOption;
 import neu.xindong.ia.service.impl.ProductServiceImpl;

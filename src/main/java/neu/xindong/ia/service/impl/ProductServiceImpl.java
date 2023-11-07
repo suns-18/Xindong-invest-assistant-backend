@@ -1,16 +1,14 @@
 package neu.xindong.ia.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import neu.xindong.ia.dao.ProductDao;
-import neu.xindong.ia.dto.ProductCom;
+import neu.xindong.ia.dto.response.ProductCom;
 import neu.xindong.ia.entity.Product;
 import neu.xindong.ia.entity.QuestionOption;
 import neu.xindong.ia.service.ProductService;
 import neu.xindong.ia.utils.Calculate;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

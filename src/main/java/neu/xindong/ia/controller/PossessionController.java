@@ -27,7 +27,7 @@ public class PossessionController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/possessionStat")
+    @GetMapping("/stat")
     @Operation(summary = "获取持仓",
             description = "返回持仓数据和持仓列表")
     public HttpResponse<PossessionStat> getPossessionStat() {

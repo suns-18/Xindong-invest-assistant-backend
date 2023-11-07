@@ -1,5 +1,7 @@
 package neu.xindong.ia.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import neu.xindong.ia.dto.HttpResponse;
 import neu.xindong.ia.dto.Question;
 import neu.xindong.ia.entity.Answer;
@@ -16,18 +18,22 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/answer")
+@Tag(name = "答案接口", description = "定义答案接口")
 public class AnswerController {
     @Autowired
     private AnswerService answerService;
 
     // 获取所有答案
     @GetMapping("/all")
+    @Operation(summary="获取答案",
+            description = "返回所有答案")
     public HttpResponse getAllAnswers() {
         List<Answer> answers = answerService.findAll();
         return HttpResponse.success(answers);
     }
 
     @GetMapping("/antiRisk")
+    @Operation(summary = "获取非风险性答案",description = "返回用户非风险性答案")
     public HttpResponse getAnswerFromAntiRiskByQuestion() {
         try {
             Answer antiRiskAnswer
@@ -41,6 +47,7 @@ public class AnswerController {
     }
 
     @GetMapping("/stability")
+    @Operation(summary = "获取稳定性答案",description = "返回用户工作稳定性答案")
     public HttpResponse getStabilityFromQuestionFromAnswer() {
 
         try {
@@ -57,6 +64,7 @@ public class AnswerController {
     }
 
     @GetMapping("/returnRate")
+    @Operation(summary = "获取收益率答案",description = "返回用户期待收益率答案")
     public HttpResponse getAnswerFromReturnRateQuestion() {
         Answer returnRateAnswer = answerService.findAnswerFromReturnRateQuestion();
         try {

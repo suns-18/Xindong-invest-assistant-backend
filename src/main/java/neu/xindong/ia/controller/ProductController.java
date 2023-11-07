@@ -3,14 +3,13 @@ package neu.xindong.ia.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import neu.xindong.ia.dto.HttpResponse;
-import neu.xindong.ia.dto.ProductCom;
+import neu.xindong.ia.dto.response.ProductCom;
 import neu.xindong.ia.entity.Answer;
 import neu.xindong.ia.entity.Product;
 import neu.xindong.ia.entity.QuestionOption;
 import neu.xindong.ia.service.AnswerService;
 import neu.xindong.ia.service.ProductService;
 import neu.xindong.ia.service.QuestionOptionService;
-import neu.xindong.ia.utils.Enums;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

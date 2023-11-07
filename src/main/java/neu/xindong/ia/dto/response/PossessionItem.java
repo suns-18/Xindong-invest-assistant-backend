@@ -1,4 +1,4 @@
-package neu.xindong.ia.dto;
+package neu.xindong.ia.dto.response;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;

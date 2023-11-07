@@ -92,7 +92,7 @@ public class ProductController {
     }
 
     // 获取综合排序的产品
-    @PostMapping("/sortByComprehensive")
+    @GetMapping("/sortByComprehensive")
     @Operation(summary = "按产品综合指标排序",
             description = "返回排序后的产品列表")
     public HttpResponse<List<ProductCom>> getProductsSortedByComprehensive() {

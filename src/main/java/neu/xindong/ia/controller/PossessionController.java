@@ -25,7 +25,7 @@ public class PossessionController {
     private ProductService productService;
 
     @GetMapping("/possessionStat")
-    public HttpResponse getPossessionStat() {
+    public HttpResponse<PossessionStat> getPossessionStat() {
         try {
             var records = tradeRecordService.findAll();
             var purchasedProducts = productService.findAll();
@@ -45,6 +45,7 @@ public class PossessionController {
 
             return HttpResponse.success(possessionStat);
         } catch (Exception e) {
+            e.printStackTrace();
             return HttpResponse.failure(0, "数据库访问错误");
         }
     }

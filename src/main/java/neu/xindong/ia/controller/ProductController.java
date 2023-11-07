@@ -32,12 +32,28 @@ public class ProductController {
 
 
     @GetMapping("/all")
-    @Operation(summary = "获取产品",
-            description = "返回产品列表")
+    @Operation(summary = "获取所有产品",
+            description = "返回所有产品的列表")
     public HttpResponse<List<Product>> getAllProducts() {
         try {
             List<Product> products = productService.findAll();
             return HttpResponse.success(products);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return HttpResponse.failure(
+                    0, "数据库访问错误");
+        }
+    }
+
+    @GetMapping("/fav")
+    @Operation(summary = "获取已收藏产品",
+            description = "返回已收藏产品的列表")
+    public HttpResponse<List<Product>> getFavProducts() {
+        try {
+            List<Product> favProducts =
+                    productService.findFavProducts();
+
+            return HttpResponse.success(favProducts);
         } catch (Exception e) {
             e.printStackTrace();
             return HttpResponse.failure(
@@ -124,4 +140,18 @@ public class ProductController {
         }
     }
 
+    @PostMapping("/changeFavState")
+    @Operation(summary = "产品收藏状态更改",
+            description = "对某一Id产品进行收藏或取消收藏的操作，返回操作结果")
+    public HttpResponse<Object> changeFavState(
+            @RequestBody Product product) {
+        try {
+            productService.changeFavState(product);
+            return HttpResponse.success();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return HttpResponse.failure(
+                    0, "操作失败，数据库访问错误");
+        }
+    }
 }

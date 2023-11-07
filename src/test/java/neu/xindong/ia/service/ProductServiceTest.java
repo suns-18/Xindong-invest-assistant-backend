@@ -85,7 +85,7 @@ public class ProductServiceTest {
     }
     @Test
     public void findFavProductTest(){
-        List<Product> productList=productService.findFavProduct();
+        List<Product> productList=productService.findFavProducts();
         for(Product product:productList){
             System.out.println(product.toString());
         }

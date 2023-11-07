@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -24,15 +25,20 @@ public class AnswerController {
 
     // 获取所有答案
     @GetMapping("/all")
-    @Operation(summary="获取答案",
+    @Operation(summary = "获取答案",
             description = "返回所有答案")
     public HttpResponse<List<Answer>> getAllAnswers() {
-        List<Answer> answers = answerService.findAll();
-        return HttpResponse.success(answers);
+        try {
+            List<Answer> answers = answerService.findAll();
+            return HttpResponse.success(answers);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return HttpResponse.failureWhenAccessDB();
+        }
     }
 
     @GetMapping("/antiRisk")
-    @Operation(summary = "获取非风险性答案",description = "返回用户非风险性答案")
+    @Operation(summary = "获取非风险性答案", description = "返回用户非风险性答案")
     public HttpResponse<Answer> getAnswerFromAntiRiskByQuestion() {
         try {
             Answer antiRiskAnswer
@@ -46,7 +52,7 @@ public class AnswerController {
     }
 
     @GetMapping("/stability")
-    @Operation(summary = "获取稳定性答案",description = "返回用户工作稳定性答案")
+    @Operation(summary = "获取稳定性答案", description = "返回用户工作稳定性答案")
     public HttpResponse<Answer> getStabilityFromQuestionFromAnswer() {
 
         try {
@@ -63,10 +69,11 @@ public class AnswerController {
     }
 
     @GetMapping("/returnRate")
-    @Operation(summary = "获取收益率答案",description = "返回用户期待收益率答案")
+    @Operation(summary = "获取收益率答案", description = "返回用户期待收益率答案")
     public HttpResponse<Answer> getAnswerFromReturnRateQuestion() {
-        Answer returnRateAnswer = answerService.findAnswerFromReturnRateQuestion();
         try {
+            Answer returnRateAnswer =
+                    answerService.findAnswerFromReturnRateQuestion();
             return HttpResponse.success(returnRateAnswer);
         } catch (Exception e) {
             return HttpResponse.failure(
@@ -75,34 +82,18 @@ public class AnswerController {
 
     }
 
-    @PostMapping("/saveAnswer")
-    public HttpResponse<List<Answer>> saveAnswer(
-            @RequestBody AnswerRequest answerReq){
-
+    @Operation(summary = "保存答案",
+            description = "输入答案的集合，提交到服务器，返回提交操作的结果")
+    @PostMapping("/save")
+    public HttpResponse<Object> saveAnswer(
+            @RequestBody AnswerRequest answerReq) {
+        try {
+            answerService.saveBatch(answerReq.answers());
+            return HttpResponse.success();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return HttpResponse.failure(
+                    0, "操作失败，数据库访问错误");
+        }
     }
-
-//    // 根据问题ID获取答案的风险偏好值
-//    @GetMapping("/antiRisk/question")
-//    public HttpResponse getAnswerAntiRiskByQuestion(@RequestBody QuestionTitle question) {
-//        Integer antiRiskValue = answerService.findAnswerAntiRiskByQuestion(question);
-//        try {
-//            if (antiRiskValue != null) {
-//                return HttpResponse.builder()
-//                        .code(200)
-//                        .message("成功获取对应问题答案的风险偏好值")
-//                        .data(antiRiskValue)
-//                        .build();
-//            } else {
-//                return HttpResponse.builder()
-//                        .code(0)
-//                        .message("风险偏好值获取失败")
-//                        .build();
-//            }
-//        } catch (Exception e) {
-//            return HttpResponse.builder()
-//                    .code(0)
-//                    .message("数据库访问错误")
-//                    .build();
-//        }
-//    }
 }

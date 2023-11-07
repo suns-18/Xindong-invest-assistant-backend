@@ -83,7 +83,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductDao, Product>
                 productList);
     }
 
-    public List<Product> findFavProduct() {
+    public List<Product> findFavProducts() {
         /*var FavList=new ArrayList<Product>();
         var ProductList=this.findAll();
         for(Product product:ProductList){
@@ -98,6 +98,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductDao, Product>
 
     /**
      * change fav state
+     *
      * @param product
      * @return
      */

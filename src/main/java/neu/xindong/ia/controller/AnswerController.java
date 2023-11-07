@@ -3,10 +3,13 @@ package neu.xindong.ia.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import neu.xindong.ia.dto.HttpResponse;
+import neu.xindong.ia.dto.request.AnswerRequest;
 import neu.xindong.ia.entity.Answer;
 import neu.xindong.ia.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,14 +26,14 @@ public class AnswerController {
     @GetMapping("/all")
     @Operation(summary="获取答案",
             description = "返回所有答案")
-    public HttpResponse getAllAnswers() {
+    public HttpResponse<List<Answer>> getAllAnswers() {
         List<Answer> answers = answerService.findAll();
         return HttpResponse.success(answers);
     }
 
     @GetMapping("/antiRisk")
     @Operation(summary = "获取非风险性答案",description = "返回用户非风险性答案")
-    public HttpResponse getAnswerFromAntiRiskByQuestion() {
+    public HttpResponse<Answer> getAnswerFromAntiRiskByQuestion() {
         try {
             Answer antiRiskAnswer
                     = answerService
@@ -44,7 +47,7 @@ public class AnswerController {
 
     @GetMapping("/stability")
     @Operation(summary = "获取稳定性答案",description = "返回用户工作稳定性答案")
-    public HttpResponse getStabilityFromQuestionFromAnswer() {
+    public HttpResponse<Answer> getStabilityFromQuestionFromAnswer() {
 
         try {
             Answer stabilityAnswer =
@@ -61,7 +64,7 @@ public class AnswerController {
 
     @GetMapping("/returnRate")
     @Operation(summary = "获取收益率答案",description = "返回用户期待收益率答案")
-    public HttpResponse getAnswerFromReturnRateQuestion() {
+    public HttpResponse<Answer> getAnswerFromReturnRateQuestion() {
         Answer returnRateAnswer = answerService.findAnswerFromReturnRateQuestion();
         try {
             return HttpResponse.success(returnRateAnswer);
@@ -72,6 +75,11 @@ public class AnswerController {
 
     }
 
+    @PostMapping("/saveAnswer")
+    public HttpResponse<List<Answer>> saveAnswer(
+            @RequestBody AnswerRequest answerReq){
+
+    }
 
 //    // 根据问题ID获取答案的风险偏好值
 //    @GetMapping("/antiRisk/question")

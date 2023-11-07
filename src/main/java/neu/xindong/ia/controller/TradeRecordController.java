@@ -29,10 +29,16 @@ public class TradeRecordController {
     }
 
     @GetMapping(value = "/queryByProductId")
-    public HttpResponse<List<TradeRecord>> getTradeRecordByProductId(@RequestBody Product product) {
-        List<TradeRecord> tradeRecordList =
-                tradeRecordService
-                        .findTradeRecordByProductId(product);
-        return HttpResponse.success(tradeRecordList);
+    public HttpResponse<List<TradeRecord>>
+    getTradeRecordByProductId(@RequestBody Product product) {
+        try {
+            List<TradeRecord> tradeRecordList =
+                    tradeRecordService
+                            .findTradeRecordByProductId(product);
+            return HttpResponse.success(tradeRecordList);
+        } catch (Exception e) {
+            return HttpResponse.failure(0, "数据库访问错误");
+        }
+
     }
 }

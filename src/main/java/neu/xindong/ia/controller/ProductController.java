@@ -35,6 +35,7 @@ public class ProductController {
             List<Product> products = productService.findAll();
             return HttpResponse.success(products);
         } catch (Exception e) {
+            e.printStackTrace();
             return HttpResponse.failure(
                     0, "数据库访问错误");
         }
@@ -47,6 +48,7 @@ public class ProductController {
             List<Product> products = productService.sortProductByRisk();
             return HttpResponse.success(products);
         } catch (Exception e) {
+            e.printStackTrace();
             return HttpResponse.failure(
                     0, "数据库访问错误");
         }
@@ -59,6 +61,7 @@ public class ProductController {
             List<Product> products = productService.sortProductByFlexibility();
             return HttpResponse.success(products);
         } catch (Exception e) {
+            e.printStackTrace();
             return HttpResponse.failure(
                     0, "数据库访问错误");
         }
@@ -71,6 +74,7 @@ public class ProductController {
             return HttpResponse.success(products);
 
         } catch (Exception e) {
+            e.printStackTrace();
             return HttpResponse.failure(
                     0, "数据库访问错误");
         }
@@ -102,6 +106,7 @@ public class ProductController {
 
             return HttpResponse.success(products);
         } catch (Exception e) {
+            e.printStackTrace();
             return HttpResponse.failure(
                     0, "数据库访问错误");
         }

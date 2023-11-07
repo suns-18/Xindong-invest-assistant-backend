@@ -6,6 +6,7 @@ import neu.xindong.ia.entity.Answer;
 import neu.xindong.ia.entity.QuestionOption;
 import neu.xindong.ia.service.QuestionOptionService;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -14,22 +15,26 @@ public class QuestionOptionServiceImpl
         implements QuestionOptionService {
     /**
      * option list
+     *
      * @param question
      * @return
      */
-    public List<QuestionOption> findQuestionOptionsByQuestion(Integer question) {
+    public List<QuestionOption> findOptionsByQuestion(Integer question) {
         return query()
                 .eq("question", question)
                 .list();
     }
-    /**Code by ryr
+
+    /**
+     * Code by ryr
      * get key question's userOption
+     *
      * @param answer
      * @return
      */
-    public QuestionOption findOptionValueByAnswer(Answer answer){
+    public QuestionOption findOptionValueByAnswer(Answer answer) {
 //        return query().eq("id",answer.getOption()).getEntity();
-        return  getById(answer.getOption());
+        return getById(answer.getOption());
     }
 
 }

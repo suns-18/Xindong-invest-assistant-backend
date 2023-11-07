@@ -2,7 +2,10 @@ package neu.xindong.ia;
 
 import jakarta.annotation.Resource;
 import neu.xindong.ia.controller.QuestionController;
+import neu.xindong.ia.controller.TradeRecordController;
+import neu.xindong.ia.dto.HttpResponse;
 import neu.xindong.ia.entity.*;
+import neu.xindong.ia.service.TradeRecordService;
 import neu.xindong.ia.service.impl.PossessionItemServiceImpl;
 import neu.xindong.ia.service.impl.QuestionOptionServiceImpl;
 import neu.xindong.ia.service.impl.QuestionTitleServiceImpl;
@@ -21,6 +24,8 @@ class XindongInvestAssistantBackendApplicationTests {
     Logger log = Logger.getLogger(String.valueOf(XindongInvestAssistantBackendApplicationTests.class));
     @Autowired
     private QuestionController questionController;
+    @Autowired
+    private TradeRecordController tradeRecordController;
     @Test
     void sortEasier(){
         var array = new ArrayList<Integer>();
@@ -40,7 +45,18 @@ class XindongInvestAssistantBackendApplicationTests {
         log.info("Project模块>>列表请求测 试1：返回所有，通过");
         log.info("Question模块>>列表请求测试通过");
     }
-
+    @Test
+    void testQuestion(){
+        HttpResponse httpResponse = questionController.queryList();
+        System.out.println(httpResponse);
+    }
+    @Test
+    void testTrade(){
+        Product product = new Product();
+        product.setId(1);
+        HttpResponse httpResponse = tradeRecordController.getTradeRecordByProductId(product);
+        System.out.println(httpResponse);
+    }
     @Resource
     private PossessionItemServiceImpl possessionService;
     @Resource

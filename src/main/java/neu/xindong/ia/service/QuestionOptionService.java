@@ -7,7 +7,7 @@ import neu.xindong.ia.entity.QuestionOption;
 import java.util.List;
 
 public interface QuestionOptionService extends IService<QuestionOption> {
-    List<QuestionOption> findQuestionOptionsByQuestion(Integer question);
+    List<QuestionOption> findOptionsByQuestion(Integer question);
     QuestionOption findOptionValueByAnswer(Answer answer);
 }
 

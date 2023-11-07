@@ -11,13 +11,23 @@ import java.util.List;
 @Service
 public class QuestionTitleServiceImpl extends ServiceImpl<QuestionTitleDao, QuestionTitle>
         implements QuestionTitleService {
-    /**code by ryr
+    /**
+     * code by ryr
      * find question title by question id
-     * @param question
+     *
+     * @param id
      * @return
      */
-    public List<QuestionTitle> findQuestionTitleByQuestion(Integer question){
-        return query().eq("id",question).list();
+    public QuestionTitle findTitleById(Integer id) {
+        return query().eq("id", id).one();
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public List<QuestionTitle> findAll() {
+        return list();
     }
 
 }

@@ -22,13 +22,13 @@ public class AnswerController {
 
     // 获取所有答案
     @GetMapping("/all")
-    public HttpResponse getAllAnswers() {
+    public HttpResponse<List<Answer>> getAllAnswers() {
         List<Answer> answers = answerService.findAll();
         return HttpResponse.success(answers);
     }
 
     @GetMapping("/antiRisk")
-    public HttpResponse getAnswerFromAntiRiskByQuestion() {
+    public HttpResponse<Answer> getAnswerFromAntiRiskByQuestion() {
         try {
             Answer antiRiskAnswer
                     = answerService
@@ -41,7 +41,7 @@ public class AnswerController {
     }
 
     @GetMapping("/stability")
-    public HttpResponse getStabilityFromQuestionFromAnswer() {
+    public HttpResponse<Answer> getStabilityFromQuestionFromAnswer() {
 
         try {
             Answer stabilityAnswer =
@@ -57,7 +57,7 @@ public class AnswerController {
     }
 
     @GetMapping("/returnRate")
-    public HttpResponse getAnswerFromReturnRateQuestion() {
+    public HttpResponse<Answer> getAnswerFromReturnRateQuestion() {
         Answer returnRateAnswer = answerService.findAnswerFromReturnRateQuestion();
         try {
             return HttpResponse.success(returnRateAnswer);

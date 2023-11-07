@@ -1,5 +1,7 @@
 package neu.xindong.ia.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import neu.xindong.ia.dto.HttpResponse;
 import neu.xindong.ia.dto.PossessionItem;
 import neu.xindong.ia.dto.PossessionStat;
@@ -16,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/possession")
+@Tag(name = "持仓接口", description = "定义持仓接口")
 public class PossessionController {
     @Autowired
     private PossessionItemService possessionItemService;
@@ -25,6 +28,8 @@ public class PossessionController {
     private ProductService productService;
 
     @GetMapping("/possessionStat")
+    @Operation(summary = "获取持仓",
+            description = "返回持仓数据和持仓列表")
     public HttpResponse<PossessionStat> getPossessionStat() {
         try {
             var records = tradeRecordService.findAll();

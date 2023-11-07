@@ -1,5 +1,7 @@
 package neu.xindong.ia.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import neu.xindong.ia.dto.HttpResponse;
 import neu.xindong.ia.dto.ProductCom;
 import neu.xindong.ia.entity.Answer;
@@ -18,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/product")
+@Tag(name = "产品接口", description = "定义产品接口")
 public class ProductController {
     @Autowired
     private ProductService productService;
@@ -30,6 +33,8 @@ public class ProductController {
 
 
     @GetMapping("/all")
+    @Operation(summary = "获取产品",
+            description = "返回产品列表")
     public HttpResponse<List<Product>> getAllProducts() {
         try {
             List<Product> products = productService.findAll();
@@ -43,6 +48,8 @@ public class ProductController {
 
     // 获取按风险排序的产品
     @GetMapping(value = "/sortByRisk")
+    @Operation(summary = "按产品非风险性排序",
+            description = "返回排序后的产品列表")
     public HttpResponse<List<Product>> getProductsSortedByRisk() {
         try {
             List<Product> products = productService.sortProductByRisk();
@@ -56,6 +63,8 @@ public class ProductController {
 
     // 获取按灵活性排序的产品
     @GetMapping("/sortByFlexibility")
+    @Operation(summary = "按产品灵活度排序",
+            description = "返回排序后的产品列表")
     public HttpResponse<List<Product>> getProductsSortedByFlexibility() {
         try {
             List<Product> products = productService.sortProductByFlexibility();
@@ -68,6 +77,8 @@ public class ProductController {
     }
 
     @GetMapping("/sortByReturn")
+    @Operation(summary = "按产品收益率排序",
+            description = "返回排序后的产品列表")
     public HttpResponse<List<Product>> getProductsSortedByReturn() {
         try {
             List<Product> products = productService.sortProductByReturn();
@@ -82,6 +93,8 @@ public class ProductController {
 
     // 获取综合排序的产品
     @PostMapping("/sortByComprehensive")
+    @Operation(summary = "按产品综合指标排序",
+            description = "返回排序后的产品列表")
     public HttpResponse<List<ProductCom>> getProductsSortedByComprehensive() {
         try {
             List<ProductCom> products;

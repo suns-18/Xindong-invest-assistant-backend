@@ -7,13 +7,8 @@ import neu.xindong.ia.dto.request.AnswerRequest;
 import neu.xindong.ia.entity.Answer;
 import neu.xindong.ia.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -54,7 +49,6 @@ public class AnswerController {
     @GetMapping("/stability")
     @Operation(summary = "获取稳定性答案", description = "返回用户工作稳定性答案")
     public HttpResponse<Answer> getStabilityFromQuestionFromAnswer() {
-
         try {
             Answer stabilityAnswer =
                     answerService

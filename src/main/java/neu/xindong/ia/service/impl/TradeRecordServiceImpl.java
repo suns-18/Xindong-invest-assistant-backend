@@ -47,6 +47,8 @@ public class TradeRecordServiceImpl extends ServiceImpl<TradeRecordDao, TradeRec
         java.util.Date utilDate = new java.util.Date();  //获取当前时间
         java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());  //通过getTime()转换
         record.setDealTime(sqlDate);
+        int num=(int)count();
+        record.setId(num+1);
         record.setSold(0);
         return save(record);
     }
@@ -60,6 +62,8 @@ public class TradeRecordServiceImpl extends ServiceImpl<TradeRecordDao, TradeRec
         java.util.Date utilDate = new java.util.Date();  //获取当前时间
         java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());  //通过getTime()转换
         record.setDealTime(sqlDate);
+        int num=(int)count();
+        record.setId(num+1);
         record.setSold(1);
         return save(record);
     }

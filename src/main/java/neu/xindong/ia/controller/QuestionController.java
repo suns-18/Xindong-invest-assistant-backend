@@ -47,7 +47,8 @@ public class QuestionController {
         } catch (Exception e) {
             e.printStackTrace();
             return HttpResponse.failure(
-                    0, "数据库访问错误");
+                    0, "数据库访" +
+                            "问错误");
         }
     }
 

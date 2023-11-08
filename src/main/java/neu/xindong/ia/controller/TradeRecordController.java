@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import neu.xindong.ia.dto.HttpResponse;
 import neu.xindong.ia.entity.Product;
 import neu.xindong.ia.entity.TradeRecord;
+import neu.xindong.ia.service.ProductService;
 import neu.xindong.ia.service.TradeRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,8 @@ import java.util.List;
 public class TradeRecordController {
     @Autowired
     private TradeRecordService tradeRecordService;
+    @Autowired
+    private ProductService productService;
 
     @GetMapping(value = "/queryList")
     @Operation(summary = "获取交易记录",

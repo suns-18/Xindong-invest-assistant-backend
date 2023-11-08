@@ -20,4 +20,5 @@ public interface TradeRecordService extends IService<TradeRecord> {
     boolean purchase(TradeRecord record);
 
     boolean sell(TradeRecord record);
+
 }

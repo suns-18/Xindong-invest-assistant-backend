@@ -6,6 +6,9 @@ import neu.xindong.ia.entity.Product;
 import neu.xindong.ia.entity.TradeRecord;
 import neu.xindong.ia.service.TradeRecordService;
 import org.springframework.stereotype.Service;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 @Service
 public class TradeRecordServiceImpl extends ServiceImpl<TradeRecordDao, TradeRecord> implements TradeRecordService {
@@ -41,7 +44,11 @@ public class TradeRecordServiceImpl extends ServiceImpl<TradeRecordDao, TradeRec
      */
     @Override
     public boolean purchase(TradeRecord record) {
-        return false;
+        java.util.Date utilDate = new java.util.Date();  //获取当前时间
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());  //通过getTime()转换
+        record.setDealTime(sqlDate);
+        record.setSold(0);
+        return save(record);
     }
 
     /**
@@ -50,7 +57,11 @@ public class TradeRecordServiceImpl extends ServiceImpl<TradeRecordDao, TradeRec
      */
     @Override
     public boolean sell(TradeRecord record) {
-        return false;
+        java.util.Date utilDate = new java.util.Date();  //获取当前时间
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());  //通过getTime()转换
+        record.setDealTime(sqlDate);
+        record.setSold(1);
+        return save(record);
     }
 
 

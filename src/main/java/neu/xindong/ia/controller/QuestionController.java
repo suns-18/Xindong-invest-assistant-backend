@@ -29,8 +29,9 @@ public class QuestionController {
             var titles = titleService.findAll();
             var questionList = new ArrayList<Question>();
 
-            var question = new Question();
+
             titles.forEach(title -> {
+                var question = new Question();
                 var options = optionService
                         .findOptionsByQuestion(title.getId());
                 question.setOptions(new ArrayList<>());

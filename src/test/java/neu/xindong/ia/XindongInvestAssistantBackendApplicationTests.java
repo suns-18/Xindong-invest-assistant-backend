@@ -63,6 +63,25 @@ class XindongInvestAssistantBackendApplicationTests {
     private QuestionTitleServiceImpl questionTitleService;
     @Resource
     private QuestionOptionServiceImpl questionOptionService;
+    @Resource
+    private TradeRecordService tradeRecordService;
+
+    /**
+     * 测试买入卖出添加记录
+     */
+    @Test
+    public void testTradeRecordAdd(){
+        TradeRecord tradeRecord = new TradeRecord();
+        tradeRecord.setProductId(5);
+        tradeRecord.setAmount(14);
+        tradeRecord.setPrice(55.00);
+        if(tradeRecordService.sell(tradeRecord)){
+            System.out.println("successful to add");
+        }else{
+            System.out.println("failed to add");
+        }
+
+    }
 /*
 
     */

@@ -29,8 +29,9 @@ public class QuestionController {
             var titles = titleService.findAll();
             var questionList = new ArrayList<Question>();
 
-            var question = new Question();
+
             titles.forEach(title -> {
+                var question = new Question();
                 var options = optionService
                         .findOptionsByQuestion(title.getId());
                 question.setOptions(new ArrayList<>());
@@ -46,7 +47,8 @@ public class QuestionController {
         } catch (Exception e) {
             e.printStackTrace();
             return HttpResponse.failure(
-                    0, "数据库访问错误");
+                    0, "数据库访" +
+                            "问错误");
         }
     }
 

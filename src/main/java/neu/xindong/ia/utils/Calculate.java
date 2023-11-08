@@ -106,15 +106,17 @@ public class Calculate {
 
         return totalCurrentPrice;*/
 
-        return records.stream().mapToDouble(record -> {
-            var optionalProduct = purchasedProducts.stream()
-                    .filter(e -> e.getId().equals(record.getProductId()))
-                    .findFirst();
+        return records.stream()
+                .filter(record -> record.getSold() == 0)
+                .mapToDouble(record -> {
+                    var optionalProduct = purchasedProducts.stream()
+                            .filter(e -> e.getId().equals(record.getProductId()))
+                            .findFirst();
 
-            return optionalProduct.map(product -> product.getPrice()
-                            * record.getAmount())
-                    .orElse(0.0);
-        }).sum();
+                    return optionalProduct.map(product -> product.getPrice()
+                                    * record.getAmount())
+                            .orElse(0.0);
+                }).sum();
     }
 
     public static Double calculateDailyProfit(
@@ -131,15 +133,18 @@ public class Calculate {
         }
         return dailyProfit;*/
 
-        return records.stream().mapToDouble(record -> {
-            var optionalProduct = purchasedProducts.stream()
-                    .filter(e -> e.getId().equals(record.getProductId()))
-                    .findFirst();
+        return records.stream()
 
-            return optionalProduct.map(product -> product.getPrice()
-                            - record.getAmount())
-                    .orElse(0.0);
-        }).sum();
+                .filter(record -> record.getSold() == 0)
+                .mapToDouble(record -> {
+                    var optionalProduct = purchasedProducts.stream()
+                            .filter(e -> e.getId().equals(record.getProductId()))
+                            .findFirst();
+
+                    return optionalProduct.map(product -> product.getPrice()
+                                    - record.getAmount())
+                            .orElse(0.0);
+                }).sum();
     }
 
 

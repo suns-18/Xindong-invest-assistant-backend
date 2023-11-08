@@ -1,9 +1,6 @@
 package neu.xindong.ia.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
-import neu.xindong.ia.dto.PossessionItem;
-import neu.xindong.ia.entity.Possession;
-import neu.xindong.ia.entity.TradeRecord;
+import neu.xindong.ia.dto.response.PossessionItem;
 
 import java.util.List;
 

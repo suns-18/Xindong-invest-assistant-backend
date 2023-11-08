@@ -209,21 +209,35 @@ class XindongInvestAssistantBackendApplicationTests {
     */
 /**
      * 测试questionTitleService
-     *//*
-
+     */
+/*
     @Test
     public void testFindQuestionTitleByQuestion(){
-        int question = 4;
-        List<QuestionTitle> questionTitleList = questionTitleService.findQuestionTitleByQuestion(Integer.valueOf(question));
-        if(questionTitleList.isEmpty()){
-            System.out.println("Failed to find questionTitle by question!");
+
+        QuestionTitle questionTitle = questionTitleService.findTitleById(10);
+        if(questionTitle.equals(null)){
+            System.out.println("Failed to find questionTitle by id!");
         }else {
-            System.out.println("Successful to find questionTitle by question!");
-            System.out.println("The question is : "+ questionTitleList.toString());
+            System.out.println("Successful to find questionTitle by id!");
+            System.out.println("The question is : "+ questionTitle.toString());
         }
     }
+*/
+    /**
+     * 测试questionTitleService
+     *//*
+    @Test
+    public void testFindAllQuestionTitle(){
+        List<QuestionTitle> questionTitleList = questionTitleService.findAll();
+        if(questionTitleList.isEmpty()){
+            System.out.println("Failed to find all questionTitle!");
+        }else {
+            System.out.println("Succceddful to find all questionTitle!");
+            System.out.println("All questions are : " + questionTitleList.toString());
+        }
+    }
+*/
 
-    */
 /**
      * 测试questionOptionService
      *//*

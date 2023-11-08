@@ -1,12 +1,10 @@
 package neu.xindong.ia.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import neu.xindong.ia.dto.ProductCom;
-import neu.xindong.ia.entity.Answer;
+import neu.xindong.ia.dto.response.ProductCom;
 import neu.xindong.ia.entity.Product;
 import neu.xindong.ia.entity.QuestionOption;
 
-import java.io.Serializable;
 import java.util.List;
 
 public interface ProductService extends IService<Product> {
@@ -24,7 +22,7 @@ public interface ProductService extends IService<Product> {
     List<Product> findAll();
     Product findProductById(Integer id);
 
-    List<Product> findFavProduct();//展示收藏产品列表
+    List<Product> findFavProducts();//展示收藏产品列表
 
     boolean changeFavState(Product product);//添加或取消收藏产品
 }

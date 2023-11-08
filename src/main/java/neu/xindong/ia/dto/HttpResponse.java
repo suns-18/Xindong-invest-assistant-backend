@@ -29,4 +29,9 @@ public record HttpResponse<T>(
                 code, null, msg
         );
     }
+
+    public static <T> HttpResponse<T> failureWhenAccessDB() {
+        return new HttpResponse<T>(
+                0, null, "操作失败，数据库访问错误");
+    }
 }

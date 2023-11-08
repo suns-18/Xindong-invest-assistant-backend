@@ -1,6 +1,6 @@
 package neu.xindong.ia.service.impl;
 
-import neu.xindong.ia.dto.PossessionItem;
+import neu.xindong.ia.dto.response.PossessionItem;
 import neu.xindong.ia.entity.Product;
 import neu.xindong.ia.entity.TradeRecord;
 import neu.xindong.ia.service.PossessionItemService;

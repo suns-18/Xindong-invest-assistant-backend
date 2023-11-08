@@ -1,6 +1,6 @@
 package neu.xindong.ia.service;
 
-import neu.xindong.ia.dto.PossessionItem;
+import neu.xindong.ia.dto.response.PossessionItem;
 import neu.xindong.ia.service.impl.PossessionItemServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;

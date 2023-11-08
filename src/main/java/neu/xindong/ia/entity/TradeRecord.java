@@ -16,7 +16,7 @@ public class TradeRecord {
     @TableId
     private Integer id;
     private Integer productId;
-    private Double price;
+    private Double price; // 建议改为cost
     private Integer amount;
     private Date dealTime;
     private Integer sold;

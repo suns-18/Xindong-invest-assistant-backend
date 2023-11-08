@@ -1,8 +1,7 @@
 package neu.xindong.ia.utils;
 
-import neu.xindong.ia.dto.ProductCom;
+import neu.xindong.ia.dto.response.ProductCom;
 import neu.xindong.ia.entity.Product;
-import neu.xindong.ia.entity.QuestionOption;
 import neu.xindong.ia.entity.TradeRecord;
 
 import java.util.ArrayList;

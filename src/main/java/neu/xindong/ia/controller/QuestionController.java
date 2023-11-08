@@ -3,7 +3,7 @@ package neu.xindong.ia.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import neu.xindong.ia.dto.HttpResponse;
-import neu.xindong.ia.dto.Question;
+import neu.xindong.ia.dto.response.Question;
 import neu.xindong.ia.service.impl.QuestionOptionServiceImpl;
 import neu.xindong.ia.service.impl.QuestionTitleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +29,9 @@ public class QuestionController {
             var titles = titleService.findAll();
             var questionList = new ArrayList<Question>();
 
-            var question = new Question();
+
             titles.forEach(title -> {
+                var question = new Question();
                 var options = optionService
                         .findOptionsByQuestion(title.getId());
                 question.setOptions(new ArrayList<>());

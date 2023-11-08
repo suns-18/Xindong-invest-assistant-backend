@@ -1,4 +1,4 @@
-package neu.xindong.ia.dto;
+package neu.xindong.ia.dto.response;
 
 import lombok.Data;
 import neu.xindong.ia.entity.QuestionOption;

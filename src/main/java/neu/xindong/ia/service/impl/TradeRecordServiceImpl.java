@@ -35,5 +35,23 @@ public class TradeRecordServiceImpl extends ServiceImpl<TradeRecordDao, TradeRec
         return query().eq("sold",sold).list();
     }
 
+    /**
+     * @param record
+     * @return
+     */
+    @Override
+    public boolean purchase(TradeRecord record) {
+        return false;
+    }
+
+    /**
+     * @param record
+     * @return
+     */
+    @Override
+    public boolean sell(TradeRecord record) {
+        return false;
+    }
+
 
 }

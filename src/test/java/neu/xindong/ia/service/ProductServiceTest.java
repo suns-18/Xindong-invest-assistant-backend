@@ -1,6 +1,6 @@
 package neu.xindong.ia.service;
 
-import neu.xindong.ia.dto.ProductCom;
+import neu.xindong.ia.dto.response.ProductCom;
 import neu.xindong.ia.entity.Product;
 import neu.xindong.ia.entity.QuestionOption;
 import neu.xindong.ia.service.impl.ProductServiceImpl;
@@ -85,7 +85,7 @@ public class ProductServiceTest {
     }
     @Test
     public void findFavProductTest(){
-        List<Product> productList=productService.findFavProduct();
+        List<Product> productList=productService.findFavProducts();
         for(Product product:productList){
             System.out.println(product.toString());
         }

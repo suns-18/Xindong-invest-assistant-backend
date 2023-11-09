@@ -75,7 +75,7 @@ class XindongInvestAssistantBackendApplicationTests {
         tradeRecord.setProductId(5);
         tradeRecord.setAmount(14);
         tradeRecord.setPrice(55.00);
-        if(tradeRecordService.sell(tradeRecord)){
+        if(tradeRecordService.purchase(tradeRecord)){
             System.out.println("successful to add");
         }else{
             System.out.println("failed to add");

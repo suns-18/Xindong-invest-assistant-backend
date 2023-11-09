@@ -96,6 +96,11 @@ public class ProductServiceTest {
         product.setState(0);
         System.out.println("return value: "+productService.changeFavState(product));
     }
+    @Test
+    public void queryByProductIdTest(){
+        Product product=new Product();
+        product.setId(1);
 
+            }
 
 }

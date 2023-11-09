@@ -14,7 +14,7 @@ public class ProductParamServiceImpl extends ServiceImpl<ProductParamDao,Product
      * @return
      */
     public ProductParam findParamByProduct(Integer id){
-        return query().eq("productId",id).list().get(0);
+        return query().eq("product_id",id).list().get(0);
     }
 
 }

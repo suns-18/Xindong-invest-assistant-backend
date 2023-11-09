@@ -6,12 +6,16 @@ import neu.xindong.ia.dto.HttpResponse;
 import neu.xindong.ia.dto.response.ProductCom;
 import neu.xindong.ia.entity.Answer;
 import neu.xindong.ia.entity.Product;
+import neu.xindong.ia.entity.ProductParam;
 import neu.xindong.ia.entity.QuestionOption;
 import neu.xindong.ia.service.AnswerService;
+import neu.xindong.ia.service.ProductParamService;
 import neu.xindong.ia.service.ProductService;
 import neu.xindong.ia.service.QuestionOptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 
 import java.util.ArrayList;
@@ -29,6 +33,8 @@ public class ProductController {
 
     @Autowired
     private QuestionOptionService optionService;
+    @Autowired
+    private ProductParamService productParamService;
 
 
     @GetMapping("/all")
@@ -237,6 +243,20 @@ public class ProductController {
         try {
             List<Product> products = productService.queryProductByName(name);
             return HttpResponse.success(products);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return HttpResponse.failure(
+                    0, "数据库访问错误");
+        }
+    }
+
+    @GetMapping("/findParamById")
+    @Operation(summary = "获取产品链接参数",
+            description = "返回产品链接参数")
+    public HttpResponse<ProductParam> findParamById(@RequestParam Integer id){
+        try {
+            ProductParam productParam = productParamService.findParamByProduct(id);
+            return HttpResponse.success(productParam);
         } catch (Exception e) {
             e.printStackTrace();
             return HttpResponse.failure(

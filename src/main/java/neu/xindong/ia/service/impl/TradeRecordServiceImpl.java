@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
 @Service
 public class TradeRecordServiceImpl extends ServiceImpl<TradeRecordDao, TradeRecord> implements TradeRecordService {
     /**
      * trade list
+     *
      * @return
      */
     public List<TradeRecord> findAll() {
@@ -22,20 +24,22 @@ public class TradeRecordServiceImpl extends ServiceImpl<TradeRecordDao, TradeRec
 
     /**
      * get tradeRecord by product id
+     *
      * @param product
      * @return
      */
-    public List<TradeRecord> findTradeRecordByProductId(Product product){
-        return query().like("product_id",product.getId()).list();
+    public List<TradeRecord> findTradeRecordByProductId(Product product) {
+        return query().like("product_id", product.getId()).list();
     }
 
     /**
      * find sold record list and unsold record list
+     *
      * @param sold
      * @return
      */
-    public List<TradeRecord> findTradeRecordBySold(Integer sold){
-        return query().eq("sold",sold).list();
+    public List<TradeRecord> findTradeRecordBySold(Integer sold) {
+        return query().eq("sold", sold).list();
     }
 
     /**
@@ -44,11 +48,9 @@ public class TradeRecordServiceImpl extends ServiceImpl<TradeRecordDao, TradeRec
      */
     @Override
     public boolean purchase(TradeRecord record) {
-        java.util.Date utilDate = new java.util.Date();  //获取当前时间
-        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());  //通过getTime()转换
-        record.setDealTime(sqlDate);
-        int num=(int)count();
-        record.setId(num+1);
+        record.setDealTime(new Date());
+        int num = (int) count();
+        record.setId(num + 1);
         record.setSold(0);
         return save(record);
     }
@@ -59,12 +61,11 @@ public class TradeRecordServiceImpl extends ServiceImpl<TradeRecordDao, TradeRec
      */
     @Override
     public boolean sell(TradeRecord record) {
-        java.util.Date utilDate = new java.util.Date();  //获取当前时间
-        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());  //通过getTime()转换
-        record.setDealTime(sqlDate);
-        int num=(int)count();
-        record.setId(num+1);
+        record.setDealTime(new Date());
+        int num = (int) count();
+        record.setId(num + 1);
         record.setSold(1);
+
         return save(record);
     }
 

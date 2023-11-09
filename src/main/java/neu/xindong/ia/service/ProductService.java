@@ -25,4 +25,6 @@ public interface ProductService extends IService<Product> {
     List<Product> findFavProducts();//展示收藏产品列表
 
     boolean changeFavState(Product product);//添加或取消收藏产品
+
+    List<Product> queryProductByName(String name);
 }

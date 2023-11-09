@@ -1,5 +1,6 @@
 package neu.xindong.ia.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import neu.xindong.ia.dao.ProductDao;
 import neu.xindong.ia.dto.response.ProductCom;
@@ -7,6 +8,7 @@ import neu.xindong.ia.entity.Product;
 import neu.xindong.ia.entity.QuestionOption;
 import neu.xindong.ia.service.ProductService;
 import neu.xindong.ia.utils.Calculate;
+import org.springframework.data.jdbc.core.convert.QueryMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -111,5 +113,15 @@ public class ProductServiceImpl extends ServiceImpl<ProductDao, Product>
             return updateById(product);
         }
         return false;
+    }
+
+    /**
+     * search by name
+     * @param name
+     * @return
+     */
+    @Override
+    public List<Product> queryProductByName(String name) {
+        return query().like("name",name).list();
     }
 }

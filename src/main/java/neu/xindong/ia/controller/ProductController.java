@@ -155,7 +155,7 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/sortByReturn")
+    @GetMapping("/sortByReturnPart")
     @Operation(summary = "搜索产品并按收益率排序",
             description = "返回排序后的产品列表")
     public HttpResponse<List<Product>> getProductsSortedByReturn(@RequestParam String name) {
@@ -170,7 +170,7 @@ public class ProductController {
         }
     }
 
-    @GetMapping(value = "/sortByRisk")
+    @GetMapping(value = "/sortByRiskPart")
     @Operation(summary = "搜索产品并按非风险性排序",
             description = "返回排序后的产品列表")
     public HttpResponse<List<Product>> getProductsSortedByRisk(@RequestParam String name) {
@@ -184,7 +184,7 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/sortByFlexibility")
+    @GetMapping("/sortByFlexibilityPart")
     @Operation(summary = "搜索产品并按灵活度排序",
             description = "返回排序后的产品列表")
     public HttpResponse<List<Product>> getProductsSortedByFlexibility(@RequestParam String name) {
@@ -198,7 +198,7 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/sortByComprehensive")
+    @GetMapping("/sortByComprehensivePart")
     @Operation(summary = "搜索产品并按综合指标排序",
             description = "返回排序后的产品列表")
     public HttpResponse<List<ProductCom>> getProductsSortedByComprehensive(@RequestParam String name) {

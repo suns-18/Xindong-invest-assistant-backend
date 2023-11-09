@@ -154,4 +154,96 @@ public class ProductController {
                     0, "操作失败，数据库访问错误");
         }
     }
+
+    @GetMapping("/sortByReturn")
+    @Operation(summary = "搜索产品并按收益率排序",
+            description = "返回排序后的产品列表")
+    public HttpResponse<List<Product>> getProductsSortedByReturn(List<Product> productList) {
+        try {
+            List<Product> products = productService.sortProductByReturn();
+            return HttpResponse.success(products);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return HttpResponse.failure(
+                    0, "数据库访问错误");
+        }
+    }
+
+    @GetMapping(value = "/sortByRisk")
+    @Operation(summary = "搜索产品并按非风险性排序",
+            description = "返回排序后的产品列表")
+    public HttpResponse<List<Product>> getProductsSortedByRisk(List<Product> productList) {
+        try {
+            List<Product> products = productService.sortProductByRisk();
+            return HttpResponse.success(products);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return HttpResponse.failure(
+                    0, "数据库访问错误");
+        }
+    }
+
+    @GetMapping("/sortByFlexibility")
+    @Operation(summary = "搜索产品并按灵活度排序",
+            description = "返回排序后的产品列表")
+    public HttpResponse<List<Product>> getProductsSortedByFlexibility(List<Product> productList) {
+        try {
+            List<Product> products = productService.sortProductByFlexibility();
+            return HttpResponse.success(products);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return HttpResponse.failure(
+                    0, "数据库访问错误");
+        }
+    }
+
+    @GetMapping("/sortByComprehensive")
+    @Operation(summary = "搜索产品并按综合指标排序",
+            description = "返回排序后的产品列表")
+    public HttpResponse<List<ProductCom>> getProductsSortedByComprehensive(List<Product> productList) {
+        try {
+            List<ProductCom> products;
+            List<Answer> answers;
+
+            List<QuestionOption> optionsAntiRisk = new ArrayList<>();
+            List<QuestionOption> optionsStability = new ArrayList<>();
+            List<QuestionOption> optionsReturn = new ArrayList<>();
+
+            answers = answerService.findAll();
+            answers.forEach(e -> {
+                var o = optionService.getById(e.getOption());
+                switch (o.getQuestionType()) {
+                    case 0 -> optionsAntiRisk.add(o);
+                    case 1 -> optionsStability.add(o);
+                    case 2 -> optionsReturn.add(o);
+                }
+            });
+
+            products = productService.sortProductByComprehensive(
+                    optionsAntiRisk, optionsStability, optionsReturn);
+
+            return HttpResponse.success(products);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return HttpResponse.failure(
+                    0, "数据库访问错误");
+        }
+    }
+    @GetMapping("/queryProductByName")
+    @Operation(summary = "搜索产品",
+            description = "返回有关的产品列表")
+    public HttpResponse<List<Product>> queryProductByName(@RequestBody String name){
+        try {
+            List<Product> products = productService.queryProductByName(name);
+            return HttpResponse.success(products);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return HttpResponse.failure(
+                    0, "数据库访问错误");
+        }
+    }
+
+
+
 }

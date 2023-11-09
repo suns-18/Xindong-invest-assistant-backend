@@ -158,9 +158,9 @@ public class ProductController {
     @GetMapping("/sortByReturn")
     @Operation(summary = "搜索产品并按收益率排序",
             description = "返回排序后的产品列表")
-    public HttpResponse<List<Product>> getProductsSortedByReturn(List<Product> productList) {
+    public HttpResponse<List<Product>> getProductsSortedByReturn(@RequestParam String name) {
         try {
-            List<Product> products = productService.sortProductByReturn();
+            List<Product> products = productService.sortProductByReturn(name);
             return HttpResponse.success(products);
 
         } catch (Exception e) {
@@ -173,9 +173,9 @@ public class ProductController {
     @GetMapping(value = "/sortByRisk")
     @Operation(summary = "搜索产品并按非风险性排序",
             description = "返回排序后的产品列表")
-    public HttpResponse<List<Product>> getProductsSortedByRisk(List<Product> productList) {
+    public HttpResponse<List<Product>> getProductsSortedByRisk(@RequestParam String name) {
         try {
-            List<Product> products = productService.sortProductByRisk();
+            List<Product> products = productService.sortProductByRisk(name);
             return HttpResponse.success(products);
         } catch (Exception e) {
             e.printStackTrace();
@@ -187,9 +187,9 @@ public class ProductController {
     @GetMapping("/sortByFlexibility")
     @Operation(summary = "搜索产品并按灵活度排序",
             description = "返回排序后的产品列表")
-    public HttpResponse<List<Product>> getProductsSortedByFlexibility(List<Product> productList) {
+    public HttpResponse<List<Product>> getProductsSortedByFlexibility(@RequestParam String name) {
         try {
-            List<Product> products = productService.sortProductByFlexibility();
+            List<Product> products = productService.sortProductByFlexibility(name);
             return HttpResponse.success(products);
         } catch (Exception e) {
             e.printStackTrace();
@@ -201,7 +201,7 @@ public class ProductController {
     @GetMapping("/sortByComprehensive")
     @Operation(summary = "搜索产品并按综合指标排序",
             description = "返回排序后的产品列表")
-    public HttpResponse<List<ProductCom>> getProductsSortedByComprehensive(List<Product> productList) {
+    public HttpResponse<List<ProductCom>> getProductsSortedByComprehensive(@RequestParam String name) {
         try {
             List<ProductCom> products;
             List<Answer> answers;
@@ -221,7 +221,7 @@ public class ProductController {
             });
 
             products = productService.sortProductByComprehensive(
-                    optionsAntiRisk, optionsStability, optionsReturn);
+                    optionsAntiRisk, optionsStability, optionsReturn,name);
 
             return HttpResponse.success(products);
         } catch (Exception e) {
@@ -233,8 +233,15 @@ public class ProductController {
     @GetMapping("/queryProductByName")
     @Operation(summary = "搜索产品",
             description = "返回有关的产品列表")
-    public List<Product> queryProductByName(@RequestBody String name){
-        return productService.queryProductByName(name);
+    public HttpResponse<List<Product>> queryProductByName(@RequestParam String name){
+        try {
+            List<Product> products = productService.queryProductByName(name);
+            return HttpResponse.success(products);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return HttpResponse.failure(
+                    0, "数据库访问错误");
+        }
     }
 
 

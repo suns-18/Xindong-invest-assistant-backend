@@ -27,4 +27,18 @@ public interface ProductService extends IService<Product> {
     boolean changeFavState(Product product);//添加或取消收藏产品
 
     List<Product> queryProductByName(String name);
+
+    List<Product> sortProductByRisk(String name);
+
+
+    List<Product> sortProductByFlexibility(String name);
+
+    List<Product> sortProductByReturn(String name);
+
+    List<ProductCom> sortProductByComprehensive(List<QuestionOption> questionOptionAntiRisk,
+                                                List<QuestionOption> questionOptionStability,
+                                                List<QuestionOption> questionOptionReturn,String name);
+
+
+
 }

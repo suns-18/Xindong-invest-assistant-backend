@@ -124,4 +124,45 @@ public class ProductServiceImpl extends ServiceImpl<ProductDao, Product>
     public List<Product> queryProductByName(String name) {
         return query().like("name",name).list();
     }
+
+    @Override
+    public List<Product> sortProductByRisk(String name) {
+        List<Product> result = query().like("name",name).orderBy(true, false, "anti_risk").list();
+        return result;
+    }
+
+    @Override
+    public List<Product> sortProductByFlexibility(String name) {
+        List<Product> result = query().like("name",name).orderBy(true, false, "flexibility").list();
+        return result;
+    }
+
+    @Override
+    public List<Product> sortProductByReturn(String name) {
+        List<Product> result = query().like("name",name).orderBy(true, false, "return_rate").list();
+        return result;
+    }
+
+    @Override
+    public List<ProductCom> sortProductByComprehensive(List<QuestionOption> optionAntiRisk,
+                                                       List<QuestionOption> optionStability,
+                                                       List<QuestionOption> optionReturn,
+                                                       String name) {
+        var productList = queryProductByName(name);
+
+        var valueAntiRisk = optionAntiRisk.stream()
+                .mapToInt(QuestionOption::getValue).sum();
+
+        var valueStability = optionStability.stream()
+                .mapToInt(QuestionOption::getValue).sum();
+
+        var valueReturn = optionReturn.stream()
+                .mapToInt(QuestionOption::getValue).sum();
+
+
+        return Calculate.calculateComprehensive(valueAntiRisk,
+                valueStability,
+                valueReturn,
+                productList);
+    }
 }

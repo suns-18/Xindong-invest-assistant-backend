@@ -233,15 +233,8 @@ public class ProductController {
     @GetMapping("/queryProductByName")
     @Operation(summary = "搜索产品",
             description = "返回有关的产品列表")
-    public HttpResponse<List<Product>> queryProductByName(@RequestBody String name){
-        try {
-            List<Product> products = productService.queryProductByName(name);
-            return HttpResponse.success(products);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return HttpResponse.failure(
-                    0, "数据库访问错误");
-        }
+    public List<Product> queryProductByName(@RequestBody String name){
+        return productService.queryProductByName(name);
     }
 
 

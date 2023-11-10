@@ -7,6 +7,8 @@ import neu.xindong.ia.entity.TradeRecord;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 
 public class Calculate {
@@ -106,7 +108,22 @@ public class Calculate {
 
         return totalCurrentPrice;*/
 
+        /*return records.stream()
+                .filter(record -> record.getSold() == 0)
+                .mapToDouble(record -> {
+                    var optionalProduct = purchasedProducts.stream()
+                            .filter(e -> e.getId().equals(record.getProductId()))
+                            .findFirst();
+
+                    return optionalProduct.map(product -> product.getPrice()
+                                    * record.getAmount())
+                            .orElse(0.0);
+                }).sum();*/
+
         return records.stream()
+                .collect(Collectors.toMap(TradeRecord::getProductId, Function.identity(), (existing, replacement) -> replacement))
+                .values()
+                .stream()
                 .filter(record -> record.getSold() == 0)
                 .mapToDouble(record -> {
                     var optionalProduct = purchasedProducts.stream()
@@ -133,16 +150,30 @@ public class Calculate {
         }
         return dailyProfit;*/
 
-        return records.stream()
-
+        /*return records.stream()
                 .filter(record -> record.getSold() == 0)
                 .mapToDouble(record -> {
                     var optionalProduct = purchasedProducts.stream()
                             .filter(e -> e.getId().equals(record.getProductId()))
                             .findFirst();
 
-                    return optionalProduct.map(product -> product.getPrice()
-                                    - record.getAmount())
+                    return optionalProduct.map(product -> (product.getPrice()-record.getPrice())
+                                    * record.getAmount())
+                            .orElse(0.0);
+                }).sum();*/
+
+        return records.stream()
+                .collect(Collectors.toMap(TradeRecord::getProductId, Function.identity(), (existing, replacement) -> replacement))
+                .values()
+                .stream()
+                .filter(record -> record.getSold() == 0)
+                .mapToDouble(record -> {
+                    var optionalProduct = purchasedProducts.stream()
+                            .filter(e -> e.getId().equals(record.getProductId()))
+                            .findFirst();
+
+                    return optionalProduct.map(product -> (product.getPrice()-record.getPrice())
+                                    * record.getAmount())
                             .orElse(0.0);
                 }).sum();
     }

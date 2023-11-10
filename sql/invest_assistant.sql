@@ -11,7 +11,7 @@
  Target Server Version : 80031
  File Encoding         : 65001
 
- Date: 09/11/2023 18:50:07
+ Date: 10/11/2023 16:15:27
 */
 
 SET NAMES utf8mb4;
@@ -34,19 +34,6 @@ CREATE TABLE `answer`  (
 INSERT INTO `answer` VALUES (1, 3, 7);
 INSERT INTO `answer` VALUES (2, 14, 59);
 INSERT INTO `answer` VALUES (3, 4, 12);
-
--- ----------------------------
--- Table structure for possession
--- ----------------------------
-DROP TABLE IF EXISTS `possession`;
-CREATE TABLE `possession`  (
-  `id` int(0) NOT NULL,
-  `product_id` int(0) NULL DEFAULT NULL,
-  `purchase_price` decimal(10, 2) NULL DEFAULT NULL,
-  `amount` int(0) NULL DEFAULT NULL,
-  `sold` int(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for product
@@ -238,6 +225,8 @@ CREATE TABLE `trade_record`  (
 -- ----------------------------
 -- Records of trade_record
 -- ----------------------------
-INSERT INTO `trade_record` VALUES (1, 1, 1.00, 1, '2023-11-07 18:44:09', 1);
+INSERT INTO `trade_record` VALUES (1, 605599, 1.00, 1, '2023-11-07 18:44:09', 0);
+INSERT INTO `trade_record` VALUES (2, 605599, 1.00, 1, '2023-11-10 15:41:06', 1);
+INSERT INTO `trade_record` VALUES (3, 605598, 3.00, 3, '2023-11-02 15:51:20', 0);
 
 SET FOREIGN_KEY_CHECKS = 1;

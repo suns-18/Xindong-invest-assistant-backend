@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost_3306
+ Source Server         : fintechSystem
  Source Server Type    : MySQL
- Source Server Version : 80031
+ Source Server Version : 80032
  Source Host           : localhost:3306
  Source Schema         : invest_assistant
 
  Target Server Type    : MySQL
- Target Server Version : 80031
+ Target Server Version : 80032
  File Encoding         : 65001
 
- Date: 10/11/2023 16:39:18
+ Date: 10/11/2023 17:33:40
 */
 
 SET NAMES utf8mb4;
@@ -22,25 +22,52 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `answer`;
 CREATE TABLE `answer`  (
-  `id` int(0) NOT NULL,
-  `question` int(0) NULL DEFAULT NULL,
-  `option` int(0) NULL DEFAULT NULL,
+  `id` int NOT NULL,
+  `question` int NULL DEFAULT NULL,
+  `option` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of answer
 -- ----------------------------
-INSERT INTO `answer` VALUES (1, 3, 7);
-INSERT INTO `answer` VALUES (2, 14, 59);
-INSERT INTO `answer` VALUES (3, 4, 12);
+INSERT INTO `answer` VALUES (1, 1, 1);
+INSERT INTO `answer` VALUES (2, 2, 6);
+INSERT INTO `answer` VALUES (3, 3, 8);
+INSERT INTO `answer` VALUES (4, 4, 14);
+INSERT INTO `answer` VALUES (5, 5, 18);
+INSERT INTO `answer` VALUES (6, 6, 23);
+INSERT INTO `answer` VALUES (7, 7, 26);
+INSERT INTO `answer` VALUES (8, 8, 29);
+INSERT INTO `answer` VALUES (9, 9, 32);
+INSERT INTO `answer` VALUES (10, 10, 37);
+INSERT INTO `answer` VALUES (11, 11, 39);
+INSERT INTO `answer` VALUES (12, 12, 51);
+INSERT INTO `answer` VALUES (13, 13, 47);
+INSERT INTO `answer` VALUES (14, 14, 56);
+
+-- ----------------------------
+-- Table structure for possession
+-- ----------------------------
+DROP TABLE IF EXISTS `possession`;
+CREATE TABLE `possession`  (
+  `id` int NOT NULL,
+  `product_id` int NULL DEFAULT NULL,
+  `purchase_price` decimal(10, 2) NULL DEFAULT NULL,
+  `amount` int NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of possession
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for product
 -- ----------------------------
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product`  (
-  `id` int(0) NULL DEFAULT NULL,
+  `id` int NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `details` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
   `price` decimal(10, 2) NULL DEFAULT NULL,
@@ -48,7 +75,7 @@ CREATE TABLE `product`  (
   `flexibility` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `return_rate` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `state` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of product
@@ -76,11 +103,11 @@ INSERT INTO `product` VALUES (600519, '贵州茅台', '贵州茅台酒股份有�
 -- ----------------------------
 DROP TABLE IF EXISTS `product_param`;
 CREATE TABLE `product_param`  (
-  `id` int(0) NOT NULL,
-  `product_id` int(0) NULL DEFAULT NULL,
+  `id` int NOT NULL,
+  `product_id` int NULL DEFAULT NULL,
   `param` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of product_param
@@ -108,13 +135,13 @@ INSERT INTO `product_param` VALUES (17, 600519, '/S/SH600519');
 -- ----------------------------
 DROP TABLE IF EXISTS `question_option`;
 CREATE TABLE `question_option`  (
-  `id` int(0) NOT NULL,
+  `id` int NOT NULL,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `question` int(0) NULL DEFAULT NULL,
-  `value` int(0) NULL DEFAULT NULL,
-  `question_type` int(0) NULL DEFAULT NULL,
+  `question` int NULL DEFAULT NULL,
+  `value` int NULL DEFAULT NULL,
+  `question_type` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of question_option
@@ -185,10 +212,10 @@ INSERT INTO `question_option` VALUES (60, '自由职业 ', 14, 3, 2);
 -- ----------------------------
 DROP TABLE IF EXISTS `question_title`;
 CREATE TABLE `question_title`  (
-  `id` int(0) NOT NULL,
+  `id` int NOT NULL,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of question_title
@@ -213,14 +240,14 @@ INSERT INTO `question_title` VALUES (14, '工作是什么？');
 -- ----------------------------
 DROP TABLE IF EXISTS `trade_record`;
 CREATE TABLE `trade_record`  (
-  `id` int(0) NOT NULL,
-  `product_id` int(0) NULL DEFAULT NULL,
+  `id` int NOT NULL,
+  `product_id` int NULL DEFAULT NULL,
   `price` decimal(10, 2) NULL DEFAULT NULL,
-  `amount` int(0) NULL DEFAULT NULL,
-  `deal_time` datetime(0) NULL DEFAULT NULL,
-  `sold` int(0) NULL DEFAULT NULL,
+  `amount` int NULL DEFAULT NULL,
+  `deal_time` datetime NULL DEFAULT NULL,
+  `sold` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of trade_record

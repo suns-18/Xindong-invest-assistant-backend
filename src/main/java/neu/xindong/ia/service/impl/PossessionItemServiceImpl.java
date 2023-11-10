@@ -200,7 +200,17 @@ public class PossessionItemServiceImpl
             });
 
             possessionItemList.add(possessionItem);
+
         });
+
+        for( int i = 0 ; i < possessionItemList.size()-1 ; i++){
+            for  ( int  j  =  possessionItemList.size()  -   1 ; j  >  i; j -- )  {
+                if  (possessionItemList.get(j).getProduct().getId()==possessionItemList.get(i).getProduct().getId())  {
+                    possessionItemList.remove(j);
+                    possessionItemList.remove(i);
+                }
+            }
+        }
         return possessionItemList;
     }
 }

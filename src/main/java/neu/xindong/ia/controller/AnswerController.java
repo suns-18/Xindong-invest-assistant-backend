@@ -82,7 +82,7 @@ public class AnswerController {
     public HttpResponse<Object> saveAnswer(
             @RequestBody AnswerRequest answerReq) {
         try {
-            answerService.saveBatch(answerReq.answers());
+            answerService.saveOrUpdateBatch(answerReq.answers());
             return HttpResponse.success();
         } catch (Exception e) {
             e.printStackTrace();

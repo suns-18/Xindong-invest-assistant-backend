@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +45,19 @@ public class ProductController {
         try {
             List<Product> products = productService.findAll();
             return HttpResponse.success(products);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return HttpResponse.failure(
+                    0, "数据库访问错误");
+        }
+    }
+    @GetMapping("/getById")
+    @Operation(summary = "获取所有产品",
+            description = "返回所有产品的列表")
+    public HttpResponse<Product> getById(@RequestParam int id) {
+        try {
+            var product = productService.getById(id);
+            return HttpResponse.success(product);
         } catch (Exception e) {
             e.printStackTrace();
             return HttpResponse.failure(

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -45,6 +47,12 @@ public class TradeRecordController {
             List<TradeRecord> tradeRecordList =
                     tradeRecordService
                             .findTradeRecordByProductId(id);
+            Collections.sort(tradeRecordList, new Comparator<TradeRecord>() {
+                @Override
+                public int compare(TradeRecord o1, TradeRecord o2) {
+                    return o2.getDealTime().compareTo(o1.getDealTime());
+                }
+            });
             return getListHttpResponse(tradeRecordList);
         } catch (Exception e) {
             return HttpResponse.failure(0, "数据库访问错误");

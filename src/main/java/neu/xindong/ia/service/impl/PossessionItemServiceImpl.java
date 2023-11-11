@@ -203,11 +203,16 @@ public class PossessionItemServiceImpl
 
         });
 
-        for( int i = 0 ; i < possessionItemList.size()-1 ; i++){
-            for  ( int  j  =  possessionItemList.size()  -   1 ; j  >  i; j -- )  {
-                if  (possessionItemList.get(j).getProduct().getId()==possessionItemList.get(i).getProduct().getId())  {
+        for( int i = 0 ; i < possessionItemList.size(); i++){
+            for  ( int j=0; j <possessionItemList.size(); j++)  {
+                if  (i!=j&&(possessionItemList.get(j).getProduct().getId()==possessionItemList.get(i).getProduct().getId()))  {
                     possessionItemList.remove(j);
                     possessionItemList.remove(i);
+                    if(i>=1){
+                        i--;
+                    }else{
+                        i=0;
+                    }
                 }
             }
         }

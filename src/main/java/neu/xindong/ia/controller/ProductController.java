@@ -52,8 +52,8 @@ public class ProductController {
         }
     }
     @GetMapping("/getById")
-    @Operation(summary = "获取所有产品",
-            description = "返回所有产品的列表")
+    @Operation(summary = "根据id获取产品",
+            description = "返回对应id的产品")
     public HttpResponse<Product> getById(@RequestParam int id) {
         try {
             var product = productService.getById(id);

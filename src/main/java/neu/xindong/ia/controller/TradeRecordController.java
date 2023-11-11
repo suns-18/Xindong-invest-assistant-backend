@@ -81,6 +81,7 @@ public class TradeRecordController {
             tradeRecordService.sell(record);
             return HttpResponse.success();
         } catch (Exception e) {
+            e.printStackTrace();
             return HttpResponse.failureWhenAccessDB();
         }
     }

@@ -13,7 +13,7 @@ import java.util.List;
 public interface TradeRecordService extends IService<TradeRecord> {
     List<TradeRecord> findAll();//也调用总资产的数据
 
-    List<TradeRecord> findTradeRecordByProductId(Product product);
+    List<TradeRecord> findTradeRecordByProductId(Integer id);
 
     List<TradeRecord> findTradeRecordBySold(Integer sold);
 

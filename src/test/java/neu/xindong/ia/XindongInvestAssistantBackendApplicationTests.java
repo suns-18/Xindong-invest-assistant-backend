@@ -55,7 +55,8 @@ class XindongInvestAssistantBackendApplicationTests {
     void testTrade(){
         Product product = new Product();
         product.setId(1);
-        HttpResponse httpResponse = tradeRecordController.getTradeRecordByProductId(product);
+        HttpResponse httpResponse = tradeRecordController
+                .getTradeRecordByProductId(product.getId());
         System.out.println(httpResponse);
     }
     @Resource

@@ -25,11 +25,11 @@ public class TradeRecordServiceImpl extends ServiceImpl<TradeRecordDao, TradeRec
     /**
      * get tradeRecord by product id
      *
-     * @param product
+     * @param product_id
      * @return
      */
-    public List<TradeRecord> findTradeRecordByProductId(Product product) {
-        return query().like("product_id", product.getId()).list();
+    public List<TradeRecord> findTradeRecordByProductId(Integer id) {
+        return query().like("product_id", id).list();
     }
 
     /**

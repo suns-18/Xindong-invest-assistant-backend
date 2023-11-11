@@ -20,20 +20,7 @@ public class TradeRecordServiceTest {
     public void findAllTest() {
         System.out.printf("tradeRecode:"+tradeRecordService.findAll());
     }
-    @Test
-    public void findTradeRecordByProductIdTest(){
-        Product product=new Product();
-        product.setId(1);
-        List<TradeRecord> tradeRecordList=tradeRecordService.findTradeRecordByProductId(product);
-        for(TradeRecord tradeRecord:tradeRecordList){
-            System.out.printf("tradeRecord:"+tradeRecord.getId()+" "
-                    +tradeRecord.getProductId()+" "
-                    +tradeRecord.getPrice()+" "
-                    +tradeRecord.getAmount()+" "
-                    +tradeRecord.getDealTime()+" "
-                    +tradeRecord.getSold());
-        }
-    }
+
     @Test
     public void findTradeRecordBySoldTest(){
         List<TradeRecord> tradeRecordList1=tradeRecordService.findTradeRecordBySold(0);

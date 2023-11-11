@@ -103,6 +103,12 @@ public class TradeRecordController {
                     .build();
             dtoList.add(dtoItem);
         }));
+        Collections.sort(dtoList, new Comparator<TradeRecordDto>() {
+            @Override
+            public int compare(TradeRecordDto o1, TradeRecordDto o2) {
+                return o2.getDealTime().compareTo(o1.getDealTime());
+            }
+        });
 
         return HttpResponse.success(dtoList);
     }

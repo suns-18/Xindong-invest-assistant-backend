@@ -3,6 +3,7 @@ package neu.xindong.ia.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import neu.xindong.ia.dto.HttpResponse;
+import neu.xindong.ia.dto.response.TradeRecordDto;
 import neu.xindong.ia.entity.Product;
 import neu.xindong.ia.entity.TradeRecord;
 import neu.xindong.ia.service.ProductService;
@@ -10,6 +11,7 @@ import neu.xindong.ia.service.TradeRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,22 +30,22 @@ public class TradeRecordController {
     @GetMapping(value = "/queryList")
     @Operation(summary = "获取交易记录",
             description = "返回交易记录列表")
-    public HttpResponse<List<TradeRecord>> getAllTradeRecord() {
+    public HttpResponse<List<TradeRecordDto>> getAllTradeRecord() {
         List<TradeRecord> tradeRecordList = tradeRecordService.findAll();
-        return HttpResponse.success(tradeRecordList);
+        return getListHttpResponse(tradeRecordList);
     }
 
     @GetMapping(value = "/queryByProductId")
     @Operation(summary = "查询交易记录",
             description = "通过产品编号查询，返回交易记录列表")
-    public HttpResponse<List<TradeRecord>>
+    public HttpResponse<List<TradeRecordDto>>
     getTradeRecordByProductId(
-            @RequestBody Product product) {
+            @RequestParam Integer id) {
         try {
             List<TradeRecord> tradeRecordList =
                     tradeRecordService
-                            .findTradeRecordByProductId(product);
-            return HttpResponse.success(tradeRecordList);
+                            .findTradeRecordByProductId(id);
+            return getListHttpResponse(tradeRecordList);
         } catch (Exception e) {
             return HttpResponse.failure(0, "数据库访问错误");
         }
@@ -73,5 +75,26 @@ public class TradeRecordController {
         } catch (Exception e) {
             return HttpResponse.failureWhenAccessDB();
         }
+    }
+
+
+    private HttpResponse<List<TradeRecordDto>> getListHttpResponse(
+            List<TradeRecord> tradeRecordList) {
+        var dtoList = new ArrayList<TradeRecordDto>();
+
+        tradeRecordList.forEach((record -> {
+            var dtoItem = TradeRecordDto.builder()
+                    .id(record.getId())
+                    .sold(record.getSold())
+                    .amount(record.getAmount())
+                    .price(record.getPrice())
+                    .dealTime(record.getDealTime())
+                    .product(productService
+                            .findProductById(record.getProductId()))
+                    .build();
+            dtoList.add(dtoItem);
+        }));
+
+        return HttpResponse.success(dtoList);
     }
 }

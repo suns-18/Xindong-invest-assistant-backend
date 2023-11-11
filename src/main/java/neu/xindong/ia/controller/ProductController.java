@@ -264,7 +264,7 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/findParamById")
+    @GetMapping("/getParamById")
     @Operation(summary = "获取产品链接参数",
             description = "返回产品链接参数")
     public HttpResponse<ProductParam> findParamById(@RequestParam Integer id){

@@ -9,6 +9,7 @@ import neu.xindong.ia.service.AnswerService;
 import neu.xindong.ia.service.QuestionOptionService;
 import neu.xindong.ia.service.TradeRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +24,7 @@ public class RiskConfigResultController {
     private AnswerService answerService;
     @Autowired
     private QuestionOptionService questionOptionService;
+    @GetMapping(value = "/queryResult")
     @Operation(summary = "获取问卷反馈",
             description = "返回问卷反馈指标")
     public HttpResponse<RiskConfigResult> getRiskConfigResult() {
